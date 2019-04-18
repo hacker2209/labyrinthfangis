@@ -3,6 +3,7 @@ package net.ictcampus.fangis;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -13,8 +14,9 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
 
     //Instancevariabels
     private Stage primarystage;
-    private BorderPane welcomeScene;
-    private GridPane setNameScene, explainScene;
+    private Scene setNameScene, explainScene, welcomeScene;
+    private BorderPane welcomeScenePane;
+    private GridPane setNameScenePane, explainScenePane;
     private Label welcomeText, gameTitle;
     private Button playButton;
 
@@ -27,9 +29,12 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
 
         //initialize Instancevariabels
         this.primarystage = primaryStage;
-        welcomeScene = new BorderPane();
-        setNameScene = new GridPane();
-        explainScene = new GridPane();
+        welcomeScenePane = new BorderPane();
+        setNameScenePane = new GridPane();
+        explainScenePane = new GridPane();
+        welcomeScene = new Scene(welcomeScenePane, 300,150);
+        explainScene = new Scene(explainScenePane);
+        setNameScene = new Scene(setNameScenePane);
 
         //Create Nodes for welcomeScene
         welcomeText = new Label("Welcome to our Labyrinth-Fanigs Game. This is a simple \nGame made by zauggmo and Technat314");
@@ -40,13 +45,16 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
         playButton.setOnAction(this);
 
         //Put Nodes on Pane
-        welcomeScene.setTop(gameTitle);
-        welcomeScene.setBottom(playButton);
-        welcomeScene.setCenter(welcomeText);
+        welcomeScenePane.setTop(gameTitle);
+        welcomeScenePane.setBottom(playButton);
+        welcomeScenePane.setCenter(welcomeText);
 
         //Add some Style to welcomeScene
         welcomeScene.getStylesheets().add(getClass().getResource("welcomeScene.css").toExternalForm());
         gameTitle.getStyleClass().add("gameTitle");
+        primaryStage.setScene(welcomeScene);
+        primaryStage.show();
+
     }
 
     //Hanlde Methode für Buttonactions
