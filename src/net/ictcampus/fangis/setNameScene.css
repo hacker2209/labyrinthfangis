@@ -1,0 +1,12 @@
+.nameTitle {
+    -fx-text-alignment: center;
+    -fx-font-size: 1.5em;
+}
+
+.pane {
+    -fx-padding: 10px;
+}
+
+.button {
+    -fx-font-size: 15px;
+}
