@@ -40,19 +40,14 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
 
     @Override
     public void start(Stage primaryStage) {
-
         //initialize Instancevariabels
         this.primarystage = primaryStage;
         welcomeScenePane = new BorderPane();
         setNameScenePane = new GridPane();
         explainScenePane = new GridPane();
         welcomeScene = new Scene(welcomeScenePane, 300, 150);
-        explainScene = new Scene(explainScenePane);
-        setNameScene = new Scene(setNameScenePane);
-
-        primaryStage.setTitle("Testtile");
-        primaryStage.setScene(explainScene);
-        primaryStage.show();
+        explainScene = new Scene(explainScenePane, 250, 160);
+        setNameScene = new Scene(setNameScenePane, 250, 160);
     }
     public void buildWelcomeScene() {
         //Create Nodes for welcomeScene
@@ -71,10 +66,11 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
         //Add some Style to welcomeScene
         welcomeScene.getStylesheets().add(getClass().getResource("welcomeScene.css").toExternalForm());
         gameTitle.getStyleClass().add("gameTitle");
+
+        //Show welcomeScene
         primaryStage.setScene(welcomeScene);
         primaryStage.show();
     }
-
     public void buildExplainScene() {
 
         //Initialize Nodes for Grid
@@ -95,50 +91,55 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
         explainScenePane.getStylesheets().add(getClass().getResource("explainScene.css").toExternalForm());
         explainTitle.getStyleClass().add("explainTitle");
 
-
-
+        //Show explainScene
+        primarystage.setScene(explainScene);
+        primarystage.show();
     }
-
     /**
      * Wechselt zur SetNameScene
      */
-    public void showSetNameScene() {
+    public void buildSetNameScene() {
+
+        //Initialize Nodes for Grid
         nextButton = new Button("Next");
         lblName = new Label("Set your Names");
         lblPlayer1 = new Label("Player 1: ");
         lblPlayer2 = new Label("Player 2: ");
         txtPlayer1 = new TextField();
         txtPlayer2 = new TextField();
-        setNameScenePane = new GridPane();
-        setNameScene = new Scene(setNameScenePane, 250, 160);
+
+        //Grid styling
         setNameScene.getStylesheets().add(getClass().getResource("setNameScene.css").toExternalForm());
         lblName.getStyleClass().add("nameTitle");
         setNameScenePane.getStyleClass().add("pane");
         nextButton.getStyleClass().add("button");
+        setNameScenePane.setVgap(10);
+        setNameScenePane.setHgap(30);
+
+        //Put Nodes into Grid
         setNameScenePane.setConstraints(lblName,0,0);
         setNameScenePane.setConstraints(nextButton,0,3);
         setNameScenePane.setColumnSpan(lblName, 2);
         setNameScenePane.setColumnSpan(nextButton, 2);
         setNameScenePane.getChildren().addAll(lblName,nextButton);
-        //setNameScenePane.add(lblName, 0, 0);
         setNameScenePane.add(lblPlayer1, 0, 1);
         setNameScenePane.add(txtPlayer1, 1, 1);
         setNameScenePane.add(lblPlayer2, 0, 2);
         setNameScenePane.add(txtPlayer2, 1, 2);
-        //setNameScenePane.add(nextButton, 0, 3);
-        setNameScenePane.setVgap(10);
-        setNameScenePane.setHgap(30);
+
+        //Define Button Action
+        nextButton.setOnAction(this);
+
+        //Show Scene
         primarystage.setScene(setNameScene);
         primarystage.show();
-        nextButton.setOnAction(this);
     }
 
     //Hanlde Methode für Buttonactions
     @Override
     public void handle(ActionEvent event) {
-        //To Do
         if (event.getSource() == playButton) {
-            showSetNameScene();
+            buildSetNameScene();
         }
     }
 }
