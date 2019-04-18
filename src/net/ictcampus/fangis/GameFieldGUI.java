@@ -39,7 +39,7 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
         welcomeScenePane = new BorderPane();
         setNameScenePane = new GridPane();
         explainScenePane = new GridPane();
-        welcomeScene = new Scene(welcomeScenePane, 300,150);
+        welcomeScene = new Scene(welcomeScenePane, 300, 150);
         explainScene = new Scene(explainScenePane);
         setNameScene = new Scene(setNameScenePane);
 
@@ -68,24 +68,42 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
     /**
      * Wechselt zur SetNameScene
      */
-    public void showSetNameScene(){
+    public void showSetNameScene() {
         nextButton = new Button("Next");
-        lblName = new Label("Set your Names Players");
-        lblPlayer1= new Label("Player 1: ");
-        lblPlayer2= new Label("Player 2: ");
-        txtPlayer1= new TextField();
-        txtPlayer2= new TextField();
+        lblName = new Label("Set your Names");
+        lblPlayer1 = new Label("Player 1: ");
+        lblPlayer2 = new Label("Player 2: ");
+        txtPlayer1 = new TextField();
+        txtPlayer2 = new TextField();
         setNameScenePane = new GridPane();
-        setNameScenePane.add(lblName,0,0);
-        setNameScene = new Scene(setNameScenePane,300,150);
+        setNameScene = new Scene(setNameScenePane, 250, 160);
+        setNameScene.getStylesheets().add(getClass().getResource("setNameScene.css").toExternalForm());
+        lblName.getStyleClass().add("nameTitle");
+        setNameScenePane.getStyleClass().add("pane");
+        nextButton.getStyleClass().add("button");
+        setNameScenePane.setConstraints(lblName,0,0);
+        setNameScenePane.setConstraints(nextButton,0,3);
+        setNameScenePane.setColumnSpan(lblName, 2);
+        setNameScenePane.setColumnSpan(nextButton, 2);
+        setNameScenePane.getChildren().addAll(lblName,nextButton);
+        //setNameScenePane.add(lblName, 0, 0);
+        setNameScenePane.add(lblPlayer1, 0, 1);
+        setNameScenePane.add(txtPlayer1, 1, 1);
+        setNameScenePane.add(lblPlayer2, 0, 2);
+        setNameScenePane.add(txtPlayer2, 1, 2);
+        //setNameScenePane.add(nextButton, 0, 3);
+        setNameScenePane.setVgap(10);
+        setNameScenePane.setHgap(30);
         primarystage.setScene(setNameScene);
         primarystage.show();
+        nextButton.setOnAction(this);
     }
+
     //Hanlde Methode für Buttonactions
     @Override
     public void handle(ActionEvent event) {
         //To Do
-        if(event.getSource()==playButton){
+        if (event.getSource() == playButton) {
             showSetNameScene();
         }
     }
