@@ -1,9 +1,15 @@
 package net.ictcampus.fangis;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class GameFieldGUI extends Application {
+public class GameFieldGUI extends Application implements EventHandler<ActionEvent> {
 
     //Instancevariabels
     private Stage primarystage;
