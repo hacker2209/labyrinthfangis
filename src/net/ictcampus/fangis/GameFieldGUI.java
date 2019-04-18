@@ -60,8 +60,8 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
         welcomeScene.getStylesheets().add(getClass().getResource("welcomeScene.css").toExternalForm());
         gameTitle.getStyleClass().add("gameTitle");
         primaryStage.setScene(welcomeScene);
-        //primaryStage.show();
-        showSetNameScene();
+        primaryStage.show();
+
 
     }
 
