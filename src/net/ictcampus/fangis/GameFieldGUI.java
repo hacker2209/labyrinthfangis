@@ -11,7 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class GameFieldGUI extends Application implements EventHandler<ActionEvent> {
+public class GameFieldGUI implements EventHandler<ActionEvent> {
 
     //Instancevariabels for all Scenes
     private Stage primarystage;
@@ -23,7 +23,6 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
     private Label explainTitle, catcherExplanation, escaperExplanation;
     private Button gameStart;
 
-
     //Instancevariables for welcomeScene
     private Label welcomeText, gameTitle;
     private Button playButton;
@@ -34,22 +33,11 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
     private TextField txtPlayer1;
     private TextField txtPlayer2;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        //initialize Instancevariabels
-        this.primarystage = primaryStage;
-        welcomeScenePane = new BorderPane();
-        setNameScenePane = new GridPane();
-        explainScenePane = new GridPane();
-        welcomeScene = new Scene(welcomeScenePane, 300, 150);
-        explainScene = new Scene(explainScenePane, 250, 160);
-        setNameScene = new Scene(setNameScenePane, 250, 160);
-    }
     public void buildWelcomeScene() {
+
+        welcomeScenePane = new BorderPane();
+        welcomeScene = new Scene(welcomeScenePane, 300, 150);
+
         //Create Nodes for welcomeScene
         welcomeText = new Label("Welcome to our Labyrinth-Fanigs Game. This is a simple \nGame made by zauggmo and Technat314");
         gameTitle = new Label("Labyrinth-Fangis");
@@ -68,24 +56,26 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
         gameTitle.getStyleClass().add("gameTitle");
 
         //Show welcomeScene
-        primaryStage.setScene(welcomeScene);
-        primaryStage.show();
+        primarystage.setScene(welcomeScene);
+        primarystage.show();
     }
     public void buildExplainScene() {
+
+        explainScenePane = new GridPane();
+        explainScene = new Scene(explainScenePane, 250, 160);
 
         //Initialize Nodes for Grid
         gameStart = new Button("Let's Go!");
         explainTitle = new Label("How it Works...");
         catcherExplanation = new Label("-Your aim is it catch the other Player by simply touching him \n- Controll with WASD \n-Throw Bananas with r");
         escaperExplanation =  new Label("-Your aim is it to escape from the catcher until the Timer is done \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
-
+        GridPane.setColumnSpan(explainTitle,2);
         //Put Nodes on Grid
         explainScenePane.add(explainTitle, 0,0);
-        GridPane.setColumnSpan(explainTitle, 2);
         explainScenePane.add(catcherExplanation, 0, 1);
         explainScenePane.add(escaperExplanation, 1,1);
         explainScenePane.add(gameStart, 0,2);
-        GridPane.addColumnSpan(gameStart, 2);
+        GridPane.setColumnSpan(gameStart, 2);
 
         //Some styling for Grid
         explainScenePane.getStylesheets().add(getClass().getResource("explainScene.css").toExternalForm());
@@ -99,6 +89,9 @@ public class GameFieldGUI extends Application implements EventHandler<ActionEven
      * Wechselt zur SetNameScene
      */
     public void buildSetNameScene() {
+
+        setNameScenePane = new GridPane();
+        setNameScene = new Scene(setNameScenePane, 250, 160);
 
         //Initialize Nodes for Grid
         nextButton = new Button("Next");

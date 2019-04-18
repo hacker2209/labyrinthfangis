@@ -1,12 +1,20 @@
 package net.ictcampus.fangis;
 
-public class Controller {
+import javafx.application.Application;
+import javafx.stage.Stage;
 
+import static javafx.application.Application.launch;
+
+public class Controller extends Application {
+
+    GameFieldGUI gui = new GameFieldGUI();
 
     public static void main(String[] args) {
-        GameFieldGUI gui = new GameFieldGUI();
+        launch(args);
+    }
 
-
-
+    public void start(Stage primarystage) {
+        //this.primarystage = primarystage;
+        gui.buildWelcomeScene();
     }
 }
