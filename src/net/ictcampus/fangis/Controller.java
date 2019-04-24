@@ -14,7 +14,7 @@ public class Controller extends Application {
     }
 
     public void start(Stage primarystage) {
-        //this.primarystage = primarystage;
+//        this.primarystage = primarystage;
         gui.buildWelcomeScene();
     }
 }
