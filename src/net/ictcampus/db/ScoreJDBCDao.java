@@ -2,14 +2,11 @@ package net.ictcampus.db;
 
 import net.ictcampus.fangis.Player;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScoreJDBCDao {
+public class ScoreJDBCDao implements ScoreDao{
     private Connection con = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
@@ -25,15 +22,15 @@ public class ScoreJDBCDao {
     public List<Player> findAll() {
         List<Player> all = new ArrayList<>();
 
-        String sql = "Select * from Ritter";
+        String sql = "Select * from Score join Rolle on id_rolle = rolle_id";
         try {
             con = openConnection();
 
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id_ritter");
-                all.add(new Player(rs.getString("name"), rs.getInt("staerke")));
+                int id = rs.getInt("id_rolle");
+                all.add(new Player(rs.getString("Username"), rs.getString("rolleName")));
             }
             closeConnection();
         } catch (SQLException e) {
@@ -43,6 +40,30 @@ public class ScoreJDBCDao {
         return all;
 
     }
+
+    @Override
+    public void insertScore(String username, Time time, int rolleID) {
+        try {
+            con = openConnection();
+            // the mysql insert statement
+            String query = " insert into Score ( username, zeit, rolle_id)"
+                    + " values (?, ?, ?)";
+
+            // create the mysql insert preparedstatement
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            preparedStmt.setString (1, username);
+            preparedStmt.setTime (2, time);
+            preparedStmt.setInt    (3, rolleID);
+            // execute the preparedstatement
+            preparedStmt.execute();
+            closeConnection();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
     private Connection openConnection() throws SQLException {
         return ConnectionFactory.getInstance().getConnection();
     }
@@ -65,5 +86,5 @@ public class ScoreJDBCDao {
             // TODO Replace by logger
             System.err.println("Error in " + getClass().getName() + ": "
                     + e.getMessage());
-        }
+        }}
 }

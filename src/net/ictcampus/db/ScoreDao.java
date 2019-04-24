@@ -10,5 +10,5 @@ public interface ScoreDao {
 
     public List<Player> findAll();
 
-    public void insertScore(String username, Time time, String rolle);
+    public void insertScore(String username, Time time, int rolleID);
 }
