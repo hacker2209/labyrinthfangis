@@ -18,9 +18,10 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
 
     //Instancevariabels for all Scenes
     Stage primarystage;
-    private Scene setNameScene, explainScene, welcomeScene;
+    private Scene setNameScene, explainScene, welcomeScene, gameScene;
     private BorderPane welcomeScenePane;
-    private GridPane setNameScenePane, explainScenePane;
+    private GridPane setNameScenePane, explainScenePane, gameRasterPane, gameFieldPane;
+
 
     //Instancevariabels for explainScene
     private Label explainTitle, catcherExplanation, escaperExplanation, catchername, escapername;
@@ -34,6 +35,10 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     private Button nextButton;
     private Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage, lblNothing;
     private TextField txtPlayer1, txtPlayer2;
+
+    //Instancevariabels for gameField
+    private Label lblScore, lblTimer;
+    private Button abrButton;
 
     //Konstruktor
     public GameFieldGUI(Stage primarystage) {
@@ -105,6 +110,9 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         explainScenePane.setVgap(30);
         explainScenePane.setHgap(30);
 
+        //Define Button Actions
+        gameStart.setOnAction(this);
+
         //Show explainScene
         primarystage.setScene(explainScene);
         primarystage.show();
@@ -143,9 +151,9 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         setNameScenePane.setHgap(30);
 
         //Put Nodes into Grid
-        setNameScenePane.setConstraints(lblName,0,0);
-        setNameScenePane.setConstraints(nextButton,0,3);
+        setNameScenePane.add(lblName, 0,0);
         setNameScenePane.setColumnSpan(lblName, 2);
+        setNameScenePane.add(nextButton,0,3);
         setNameScenePane.setColumnSpan(nextButton, 2);
         setNameScenePane.getChildren().addAll(lblName,nextButton);
         setNameScenePane.add(lblPlayer1, 0, 1);
@@ -160,6 +168,34 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         primarystage.setScene(setNameScene);
         primarystage.show();
     }
+    public void buildGameField() {
+
+        gameRasterPane = new GridPane();
+        gameFieldPane = new GridPane();
+        gameScene = new Scene(gameRasterPane, 1000,600);
+
+        //Initialize Nodes for Grid
+        lblScore = new Label("The Score");
+        lblTimer = new Label("3:00");
+        abrButton = new Button("Abbrechen");
+
+
+        //Grid Styling
+        setNameScene.getStylesheets().add(getClass().getResource("gameField.css").toExternalForm());
+
+        //Put Nodes on Raster
+        gameRasterPane.add(gameFieldPane,0,0);
+        gameRasterPane.add(abrButton,0,1);
+        gameRasterPane.add(lblScore,1,1);
+        gameRasterPane.add(lblTimer, 2,1);
+
+        //Put Nodes on Field
+
+        //Show Scene
+        primarystage.setScene(gameScene);
+        primarystage.show();
+    }
+
 
     //Hanlde Methode für Buttonactions
     @Override
@@ -188,6 +224,9 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
                 }
 
             }
+        }
+        else if (event.getSource() == gameStart) {
+            buildGameField();
         }
     }
 }
