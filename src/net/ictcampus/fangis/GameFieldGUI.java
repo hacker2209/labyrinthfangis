@@ -29,7 +29,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
 
     //Instancevariabels for setNameScene
     private Button nextButton;
-    private Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage;
+    private Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage, lblNothing;
     private TextField txtPlayer1, txtPlayer2;
 
     //Konstruktor
@@ -105,7 +105,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildSetNameScene() {
 
         setNameScenePane = new GridPane();
-        setNameScene = new Scene(setNameScenePane, 300, 160);
+        setNameScene = new Scene(setNameScenePane, 300, 200);
 
         //Initialize Nodes for Grid
         nextButton = new Button("Next");
@@ -115,6 +115,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         txtPlayer1 = new TextField();
         txtPlayer2 = new TextField();
         lblErrorMessage = new Label("No valid Names!");
+        lblNothing = new Label();
 
         //Action for next Button
         nextButton.setOnAction(this);
@@ -160,8 +161,15 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
                 buildExplainScene();
             }
             else {
+                if (lblErrorMessage.getScene() == null) {
                 setNameScenePane.add(lblErrorMessage, 0,4);
                 GridPane.setColumnSpan(lblErrorMessage, 2);
+                }
+                else {
+                    setNameScenePane.getChildren().remove(lblErrorMessage);
+                    setNameScenePane.add(lblErrorMessage, 0,4);
+                    GridPane.setColumnSpan(lblErrorMessage, 2);
+                }
 
             }
         }
