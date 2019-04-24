@@ -1,5 +1,5 @@
 package net.ictcampus.fangis;
-
+import javafx.scene.image.Image;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,6 +14,7 @@ public class Controller extends Application {
 
     public void start(Stage primarystage) {
         GameFieldGUI gui = new GameFieldGUI(primarystage);
+        primarystage.getIcons().add(new Image(""));
         gui.buildWelcomeScene();
     }
 }

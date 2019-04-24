@@ -60,6 +60,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         //Add some Style to welcomeScene
         welcomeScene.getStylesheets().add(getClass().getResource("welcomeScene.css").toExternalForm());
         gameTitle.getStyleClass().add("gameTitle");
+        playButton.getStyleClass().add("playButton");
 
         //Show welcomeScene
         primarystage.setScene(welcomeScene);
