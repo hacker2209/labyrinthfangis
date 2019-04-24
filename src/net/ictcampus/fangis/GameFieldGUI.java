@@ -1,6 +1,8 @@
 package net.ictcampus.fangis;
 
-import javafx.application.Application;
+import javafx.animation.Animation;
+
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -10,14 +12,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class GameFieldGUI implements EventHandler<ActionEvent> {
 
     //Instancevariabels for all Scenes
     Stage primarystage;
-    private Scene setNameScene, explainScene, welcomeScene;
+    private Scene setNameScene, explainScene, welcomeScene, gameScene;
     private BorderPane welcomeScenePane;
-    private GridPane setNameScenePane, explainScenePane;
+    private GridPane setNameScenePane, explainScenePane, gameRasterPane, gameFieldPane;
+
 
     //Instancevariabels for explainScene
     private Label explainTitle, catcherExplanation, escaperExplanation, catchername, escapername;
@@ -31,6 +35,10 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     private Button nextButton;
     private Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage, lblNothing;
     private TextField txtPlayer1, txtPlayer2;
+
+    //Instancevariabels for gameField
+    private Label lblScore, lblTimer;
+    private Button abrButton;
 
     //Konstruktor
     public GameFieldGUI(Stage primarystage) {
@@ -77,8 +85,8 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         catchername  = new Label(txtPlayer1.getText());
         escapername = new Label(txtPlayer2.getText());
         explainTitle = new Label("How it Works...");
-        catcherExplanation = new Label("- Your aim is it catch the other \nPlayer by simply touching him \n- Controll with WASD \n- Throw Bananas with r");
-        escaperExplanation =  new Label("- Your aim is it to escape from the \ncatcher until the Timer is done \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
+        catcherExplanation = new Label("- Your aim is\n to catch\nthe other by touching him\n- Controll with WASD \n- Throw Bananas with r");
+        escaperExplanation =  new Label("- Your aim is\n to escape  \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
         GridPane.setColumnSpan(explainTitle,2);
 
         //Put Nodes on Grid
@@ -100,6 +108,10 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         escapername.getStyleClass().add("name");
         gameStart.getStyleClass().add("start");
         explainScenePane.setVgap(30);
+        explainScenePane.setHgap(30);
+
+        //Define Button Actions
+        gameStart.setOnAction(this);
 
         //Show explainScene
         primarystage.setScene(explainScene);
@@ -134,15 +146,15 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         nextButton.getStyleClass().add("button");
         lblPlayer1.getStyleClass().add("player");
         lblPlayer2.getStyleClass().add("player");
+        lblErrorMessage.getStyleClass().add("error");
         setNameScenePane.setVgap(10);
         setNameScenePane.setHgap(30);
 
         //Put Nodes into Grid
-        setNameScenePane.setConstraints(lblName,0,0);
-        setNameScenePane.setConstraints(nextButton,0,3);
+        setNameScenePane.add(lblName, 0,0);
         setNameScenePane.setColumnSpan(lblName, 2);
+        setNameScenePane.add(nextButton,0,3);
         setNameScenePane.setColumnSpan(nextButton, 2);
-        setNameScenePane.getChildren().addAll(lblName,nextButton);
         setNameScenePane.add(lblPlayer1, 0, 1);
         setNameScenePane.add(txtPlayer1, 1, 1);
         setNameScenePane.add(lblPlayer2, 0, 2);
@@ -155,6 +167,34 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         primarystage.setScene(setNameScene);
         primarystage.show();
     }
+    public void buildGameField() {
+
+        gameRasterPane = new GridPane();
+        gameFieldPane = new GridPane();
+        gameScene = new Scene(gameRasterPane, 1000,600);
+
+        //Initialize Nodes for Grid
+        lblScore = new Label("The Score");
+        lblTimer = new Label("3:00");
+        abrButton = new Button("Abbrechen");
+
+
+        //Grid Styling
+        setNameScene.getStylesheets().add(getClass().getResource("gameField.css").toExternalForm());
+
+        //Put Nodes on Raster
+        gameRasterPane.add(gameFieldPane,0,0);
+        gameRasterPane.add(abrButton,0,1);
+        gameRasterPane.add(lblScore,1,1);
+        gameRasterPane.add(lblTimer, 2,1);
+
+        //Put Nodes on Field
+
+        //Show Scene
+        primarystage.setScene(gameScene);
+        primarystage.show();
+    }
+
 
     //Hanlde Methode für Buttonactions
     @Override
@@ -168,6 +208,11 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
             }
             else {
                 if (lblErrorMessage.getScene() == null) {
+                    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.1), lblErrorMessage);
+                    fadeTransition.setFromValue(1.0);
+                    fadeTransition.setToValue(0.0);
+                    fadeTransition.setCycleCount(Animation.INDEFINITE);
+                    fadeTransition.play();
                 setNameScenePane.add(lblErrorMessage, 0,4);
                 GridPane.setColumnSpan(lblErrorMessage, 2);
                 }
@@ -178,6 +223,9 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
                 }
 
             }
+        }
+        else if (event.getSource() == gameStart) {
+            buildGameField();
         }
     }
 }
