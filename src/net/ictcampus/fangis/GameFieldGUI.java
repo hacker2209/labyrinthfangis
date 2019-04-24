@@ -155,7 +155,6 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         setNameScenePane.setColumnSpan(lblName, 2);
         setNameScenePane.add(nextButton,0,3);
         setNameScenePane.setColumnSpan(nextButton, 2);
-        setNameScenePane.getChildren().addAll(lblName,nextButton);
         setNameScenePane.add(lblPlayer1, 0, 1);
         setNameScenePane.add(txtPlayer1, 1, 1);
         setNameScenePane.add(lblPlayer2, 0, 2);
