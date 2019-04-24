@@ -1,8 +1,17 @@
 .gameTitle {
     -fx-text-alignment: center;
-    -fx-font-size: 3em;
+    -fx-font-size: 2em;
+    -fx-font-family: "Courier New", Courier, monospace;
 }
 
 .playButton {
-    -fx-
+    -fx-margin: 10px;
+    -fx-font-family: "Courier New", Courier, monospace;
+}
+
+.pane {
+    -fx-padding: 10px;
+}
+.text{
+    -fx-font-family: "Courier New", Courier, monospace;
 }

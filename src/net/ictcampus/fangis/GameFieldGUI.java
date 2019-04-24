@@ -40,10 +40,10 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildWelcomeScene() {
 
         welcomeScenePane = new BorderPane();
-        welcomeScene = new Scene(welcomeScenePane, 300, 150);
+        welcomeScene = new Scene(welcomeScenePane, 300, 160);
 
         //Create Nodes for welcomeScene
-        welcomeText = new Label("Welcome to our Labyrinth-Fanigs Game. This is a simple \nGame made by zauggmo and Technat314");
+        welcomeText = new Label("Welcome to our Labyrinth-Fanigs Game!\nThis is a simple Game\nmade by zauggmo and Technat314");
         gameTitle = new Label("Labyrinth-Fangis");
         playButton = new Button("Play");
 
@@ -59,6 +59,8 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         welcomeScene.getStylesheets().add(getClass().getResource("welcomeScene.css").toExternalForm());
         gameTitle.getStyleClass().add("gameTitle");
         playButton.getStyleClass().add("playButton");
+        welcomeScenePane.getStyleClass().add("pane");
+        welcomeText.getStyleClass().add("text");
 
         //Show welcomeScene
         primarystage.setScene(welcomeScene);
@@ -67,7 +69,11 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildExplainScene() {
 
         explainScenePane = new GridPane();
+<<<<<<< Updated upstream
         explainScene = new Scene(explainScenePane, 400, 300);
+=======
+        explainScene = new Scene(explainScenePane, 300, 160);
+>>>>>>> Stashed changes
 
         //Initialize Nodes for Grid
         gameStart = new Button("Let's Go!");
@@ -102,7 +108,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildSetNameScene() {
 
         setNameScenePane = new GridPane();
-        setNameScene = new Scene(setNameScenePane, 250, 160);
+        setNameScene = new Scene(setNameScenePane, 300, 160);
 
         //Initialize Nodes for Grid
         nextButton = new Button("Next");
@@ -122,6 +128,8 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         lblName.getStyleClass().add("nameTitle");
         setNameScenePane.getStyleClass().add("pane");
         nextButton.getStyleClass().add("button");
+        lblPlayer1.getStyleClass().add("player");
+        lblPlayer2.getStyleClass().add("player");
         setNameScenePane.setVgap(10);
         setNameScenePane.setHgap(30);
 

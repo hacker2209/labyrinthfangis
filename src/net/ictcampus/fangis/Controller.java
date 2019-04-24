@@ -14,7 +14,6 @@ public class Controller extends Application {
 
     public void start(Stage primarystage) {
         GameFieldGUI gui = new GameFieldGUI(primarystage);
-        primarystage.getIcons().add(new Image(""));
         gui.buildWelcomeScene();
     }
 }
