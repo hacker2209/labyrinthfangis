@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScoreJDBCDao implements ScoreDao{
+public class ScoreJDBCDao implements ScoreDao {
     private Connection con = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
@@ -51,9 +51,9 @@ public class ScoreJDBCDao implements ScoreDao{
 
             // create the mysql insert preparedstatement
             PreparedStatement preparedStmt = con.prepareStatement(query);
-            preparedStmt.setString (1, username);
-            preparedStmt.setTime (2, time);
-            preparedStmt.setInt    (3, rolleID);
+            preparedStmt.setString(1, username);
+            preparedStmt.setTime(2, time);
+            preparedStmt.setInt(3, rolleID);
             // execute the preparedstatement
             preparedStmt.execute();
             closeConnection();
@@ -62,6 +62,30 @@ public class ScoreJDBCDao implements ScoreDao{
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public List<String> maxScore() {
+        List<String> all = new ArrayList<>();
+
+        String sql = "Select  username, rolleName, zeit from Score join Rolle on id_rolle = rolle_id ORDER BY zeit asc LIMIT 10";
+        try {
+            con = openConnection();
+
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String time = rs.getTime("zeit").toString();
+                all.add(rs.getString("username"));
+                all.add(rs.getString("rolleName"));
+                all.add(time);
+            }
+            closeConnection();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return all;
     }
 
     private Connection openConnection() throws SQLException {
@@ -86,5 +110,6 @@ public class ScoreJDBCDao implements ScoreDao{
             // TODO Replace by logger
             System.err.println("Error in " + getClass().getName() + ": "
                     + e.getMessage());
-        }}
+        }
+    }
 }

@@ -21,7 +21,7 @@ public class ConnectionFactory {
     public static ConnectionFactory getInstance(){
         if (connectionFactory == null){
 
-            connectionFactory = new ConnectionFactory("jdbc:mysql://192.168.3.55:3306", "rootext", "sml12345");
+            connectionFactory = new ConnectionFactory("jdbc:mysql://192.168.3.55:3306/Labyrinthfangis", "rootext", "sml12345");
         }
         return connectionFactory;
     }
