@@ -50,7 +50,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         //Define Buttonaction
         playButton.setOnAction(this);
 
-        //Put Nodes on Pane
+        //Put Nodes on PaneT
         welcomeScenePane.setTop(gameTitle);
         welcomeScenePane.setBottom(playButton);
         welcomeScenePane.setCenter(welcomeText);
