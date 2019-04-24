@@ -111,7 +111,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildSetNameScene() {
 
         setNameScenePane = new GridPane();
-        setNameScene = new Scene(setNameScenePane, 300, 150);
+        setNameScene = new Scene(setNameScenePane, 300, 180);
 
         //Initialize Nodes for Grid
         nextButton = new Button("Next");
