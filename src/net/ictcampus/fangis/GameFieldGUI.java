@@ -18,34 +18,35 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class GameFieldGUI implements EventHandler<ActionEvent> {
+public class GameFieldGUI implements EventHandler<ActionEvent>, KeyListener {
 
     //Instancevariabels for all Scenes
     Stage primarystage;
     Controller con;
-    protected Scene setNameScene, explainScene, welcomeScene, gameScene;
-    protected BorderPane welcomeScenePane;
-    protected GridPane setNameScenePane, explainScenePane, gameRasterPane;
-    protected Pane gameFieldPane;
+    Scene setNameScene, explainScene, welcomeScene, gameScene;
+    BorderPane welcomeScenePane;
+    GridPane setNameScenePane, explainScenePane, gameRasterPane;
+    Pane gameFieldPane;
 
 
     //Instancevariabels for explainScene
-    protected Label explainTitle, catcherExplanation, escaperExplanation, catchername, escapername;
-    protected Button gameStart;
+    Label explainTitle, catcherExplanation, escaperExplanation, catchername, escapername;
+    Button gameStart;
 
     //Instancevariables for welcomeScene
-    protected Label welcomeText, gameTitle;
-    protected Button playButton;
+    Label welcomeText, gameTitle;
+    Button playButton;
 
     //Instancevariabels for setNameScene
-    protected Button nextButton;
-    protected Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage, lblNothing;
-    protected TextField txtPlayer1, txtPlayer2;
+    Button nextButton;
+    Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage, lblNothing;
+    TextField txtPlayer1, txtPlayer2;
 
     //Instancevariabels for gameField
-    protected Label lblScore, lblTimer;
-    protected Button abrButton;
+    Label lblScore, lblTimer;
+    Button abrButton;
 
     //Konstruktor
     public GameFieldGUI(Stage primarystage, Controller con) {
@@ -119,7 +120,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         explainScenePane.setHgap(30);
 
         //Define Button Actions
-        gameStart.setOnAction(e -> con.handle(e));
+        gameStart.setOnAction(this);
 
         //Show explainScene
         primarystage.setScene(explainScene);
@@ -142,7 +143,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         lblNothing = new Label();
 
         //Action for next Button
-        nextButton.setOnAction(e -> con.handle(e));
+        nextButton.setOnAction(this);
 
         //Grid styling
         setNameScene.getStylesheets().add(getClass().getResource("setNameScene.css").toExternalForm());
@@ -166,7 +167,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         setNameScenePane.add(txtPlayer2, 1, 2);
 
         //Define Button Action
-        nextButton.setOnAction(e -> con.handle(e));
+        nextButton.setOnAction(this);
 
         //Show Scene
         primarystage.setScene(setNameScene);
@@ -180,13 +181,13 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         gameFieldPane.setMinHeight(400.0);
 
 
-        // need to attach KeyEvent caller to a Node of some sort.
-        // How about an invisible Box?
-//        final Box keyboardNode = new Box();
-////        keyboardNode.setFocusTraversable(true);
-////        keyboardNode.requestFocus();
-////        keyboardNode.setOnKeyPressed(e -> con.handle(e));
-////        gameFieldPane.getChildren().add(keyboardNode);
+//         need to attach KeyEvent caller to a Node of some sort.
+//         How about an invisible Box?
+        final Box keyboardNode = new Box();
+        keyboardNode.setFocusTraversable(true);
+        keyboardNode.requestFocus();
+        keyboardNode.setOnKeyPressed(this);
+        gameFieldPane.getChildren().add(keyboardNode);
 
         //Initialize Nodes for Grid
         lblScore = new Label("The Score");
@@ -218,11 +219,54 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     }
 
     //Hanlde Methode für Buttonactions
-//    @Override
-//    public void handle(ActionEvent event) {
-//        con.handleevent(event);
-//    }
+    public void handle(ActionEvent event) {
+        if (event.getSource() == playButton) {
+            buildSetNameScene();
+        }
+        else if (event.getSource() == nextButton) {
+            if (!txtPlayer1.getText().equals("") && !txtPlayer2.getText().equals("")) {
+                buildExplainScene();
+            }
+            else {
+                if (lblErrorMessage.getScene() == null) {
+                    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.1), lblErrorMessage);
+                    fadeTransition.setFromValue(1.0);
+                    fadeTransition.setToValue(0.0);
+                    fadeTransition.setCycleCount(Animation.INDEFINITE);
+                    fadeTransition.play();
+                    setNameScenePane.add(lblErrorMessage, 0,4);
+                    GridPane.setColumnSpan(lblErrorMessage, 2);
+                }
+                else {
+                    setNameScenePane.getChildren().remove(lblErrorMessage);
+                    setNameScenePane.add(lblErrorMessage, 0,4);
+                    GridPane.setColumnSpan(lblErrorMessage, 2);
+                }
 
+            }
+        }
+        else if (event.getSource() == gameStart) {
+            buildGameField();
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_B:
+                animator.stop();
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
     //------------------------------------------ Getter & Setter ----------------------------------------
     //------------------------------------------ Getter & Setter ----------------------------------------
     //------------------------------------------ Getter & Setter ----------------------------------------
@@ -349,5 +393,6 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public Button getAbrButton() {
         return abrButton;
     }
+
 
 }
