@@ -7,6 +7,7 @@
 }
 .explan{
     -fx-font-family: "Courier New", Courier, monospace;
+    -fx-font-size: 13px;
 }
 .name{
     -fx-font-size: 2em;

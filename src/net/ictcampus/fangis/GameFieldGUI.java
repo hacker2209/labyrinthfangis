@@ -1,6 +1,8 @@
 package net.ictcampus.fangis;
 
-import javafx.application.Application;
+import javafx.animation.Animation;
+
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -10,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class GameFieldGUI implements EventHandler<ActionEvent> {
 
@@ -77,8 +80,8 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         catchername  = new Label(txtPlayer1.getText());
         escapername = new Label(txtPlayer2.getText());
         explainTitle = new Label("How it Works...");
-        catcherExplanation = new Label("- Your aim is it catch the other \nPlayer by simply touching him \n- Controll with WASD \n- Throw Bananas with r");
-        escaperExplanation =  new Label("- Your aim is it to escape from the \ncatcher until the Timer is done \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
+        catcherExplanation = new Label("- Your aim is\n to catch\nthe other by touching him\n- Controll with WASD \n- Throw Bananas with r");
+        escaperExplanation =  new Label("- Your aim is\n to escape  \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
         GridPane.setColumnSpan(explainTitle,2);
 
         //Put Nodes on Grid
@@ -100,6 +103,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         escapername.getStyleClass().add("name");
         gameStart.getStyleClass().add("start");
         explainScenePane.setVgap(30);
+        explainScenePane.setHgap(30);
 
         //Show explainScene
         primarystage.setScene(explainScene);
@@ -134,6 +138,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         nextButton.getStyleClass().add("button");
         lblPlayer1.getStyleClass().add("player");
         lblPlayer2.getStyleClass().add("player");
+        lblErrorMessage.getStyleClass().add("error");
         setNameScenePane.setVgap(10);
         setNameScenePane.setHgap(30);
 
@@ -168,6 +173,11 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
             }
             else {
                 if (lblErrorMessage.getScene() == null) {
+                    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.1), lblErrorMessage);
+                    fadeTransition.setFromValue(1.0);
+                    fadeTransition.setToValue(0.0);
+                    fadeTransition.setCycleCount(Animation.INDEFINITE);
+                    fadeTransition.play();
                 setNameScenePane.add(lblErrorMessage, 0,4);
                 GridPane.setColumnSpan(lblErrorMessage, 2);
                 }
