@@ -29,7 +29,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
 
     //Instancevariabels for setNameScene
     private Button nextButton;
-    private Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage;
+    private Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage, lblNothing;
     private TextField txtPlayer1, txtPlayer2;
 
     //Konstruktor
@@ -50,7 +50,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         //Define Buttonaction
         playButton.setOnAction(this);
 
-        //Put Nodes on Pane
+        //Put Nodes on PaneT
         welcomeScenePane.setTop(gameTitle);
         welcomeScenePane.setBottom(playButton);
         welcomeScenePane.setCenter(welcomeText);
@@ -121,6 +121,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         txtPlayer1 = new TextField();
         txtPlayer2 = new TextField();
         lblErrorMessage = new Label("No valid Names!");
+        lblNothing = new Label();
 
         //Action for next Button
         nextButton.setOnAction(this);
