@@ -1,3 +1,17 @@
 .explainTitle {
     -fx-font-size: 3em;
+    -fx-font-family: "Courier New", Courier, monospace;
+}
+.pane {
+    -fx-padding: 10px;
+}
+.explan{
+    -fx-font-family: "Courier New", Courier, monospace;
+}
+.name{
+    -fx-font-size: 2em;
+    -fx-font-family: "Courier New", Courier, monospace;
+}
+.start{
+    -fx-font-family: "Courier New", Courier, monospace;
 }

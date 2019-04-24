@@ -69,7 +69,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildExplainScene() {
 
         explainScenePane = new GridPane();
-        explainScene = new Scene(explainScenePane, 400, 300);
+        explainScene = new Scene(explainScenePane, 520, 300);
 
 
         //Initialize Nodes for Grid
@@ -77,8 +77,8 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         catchername  = new Label(txtPlayer1.getText());
         escapername = new Label(txtPlayer2.getText());
         explainTitle = new Label("How it Works...");
-        catcherExplanation = new Label("-Your aim is it catch the other \nPlayer by simply touching him \n- Controll with WASD \n-Throw Bananas with r");
-        escaperExplanation =  new Label("-Your aim is it to escape from the \ncatcher until the Timer is done \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
+        catcherExplanation = new Label("- Your aim is it catch the other \nPlayer by simply touching him \n- Controll with WASD \n- Throw Bananas with r");
+        escaperExplanation =  new Label("- Your aim is it to escape from the \ncatcher until the Timer is done \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
         GridPane.setColumnSpan(explainTitle,2);
 
         //Put Nodes on Grid
@@ -93,6 +93,12 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         //Some styling for Grid
         explainScenePane.getStylesheets().add(getClass().getResource("explainScene.css").toExternalForm());
         explainTitle.getStyleClass().add("explainTitle");
+        explainScenePane.getStyleClass().add("pane");
+        catcherExplanation.getStyleClass().add("explan");
+        escaperExplanation.getStyleClass().add("explan");
+        catchername.getStyleClass().add("name");
+        escapername.getStyleClass().add("name");
+        gameStart.getStyleClass().add("start");
         explainScenePane.setVgap(30);
 
         //Show explainScene
@@ -105,7 +111,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildSetNameScene() {
 
         setNameScenePane = new GridPane();
-        setNameScene = new Scene(setNameScenePane, 300, 160);
+        setNameScene = new Scene(setNameScenePane, 300, 150);
 
         //Initialize Nodes for Grid
         nextButton = new Button("Next");
