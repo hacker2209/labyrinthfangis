@@ -69,7 +69,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildExplainScene() {
 
         explainScenePane = new GridPane();
-        explainScene = new Scene(explainScenePane, 520, 300);
+        explainScene = new Scene(explainScenePane, 400, 300);
 
 
         //Initialize Nodes for Grid
@@ -111,7 +111,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildSetNameScene() {
 
         setNameScenePane = new GridPane();
-        setNameScene = new Scene(setNameScenePane, 300, 180);
+        setNameScene = new Scene(setNameScenePane, 300, 200);
 
         //Initialize Nodes for Grid
         nextButton = new Button("Next");
@@ -166,8 +166,15 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
                 buildExplainScene();
             }
             else {
+                if (lblErrorMessage.getScene() == null) {
                 setNameScenePane.add(lblErrorMessage, 0,4);
                 GridPane.setColumnSpan(lblErrorMessage, 2);
+                }
+                else {
+                    setNameScenePane.getChildren().remove(lblErrorMessage);
+                    setNameScenePane.add(lblErrorMessage, 0,4);
+                    GridPane.setColumnSpan(lblErrorMessage, 2);
+                }
 
             }
         }
