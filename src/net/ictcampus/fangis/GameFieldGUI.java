@@ -13,8 +13,9 @@ import javafx.stage.Stage;
 
 public class GameFieldGUI implements EventHandler<ActionEvent> {
 
+
     //Instancevariabels for all Scenes
-    private Stage primarystage;
+    Stage primarystage;
     private Scene setNameScene, explainScene, welcomeScene;
     private BorderPane welcomeScenePane;
     private GridPane setNameScenePane, explainScenePane;
@@ -32,6 +33,11 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     private Label lblPlayer2;
     private TextField txtPlayer1;
     private TextField txtPlayer2;
+
+    //Konstruktor
+    public GameFieldGUI(Stage primarystage) {
+        this.primarystage = primarystage;
+    }
 
     public void buildWelcomeScene() {
 
