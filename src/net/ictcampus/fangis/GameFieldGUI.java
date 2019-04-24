@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 public class GameFieldGUI implements EventHandler<ActionEvent> {
 
-
     //Instancevariabels for all Scenes
     Stage primarystage;
     private Scene setNameScene, explainScene, welcomeScene;
@@ -21,18 +20,17 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     private GridPane setNameScenePane, explainScenePane;
 
     //Instancevariabels for explainScene
-    private Label explainTitle, catcherExplanation, escaperExplanation;
+    private Label explainTitle, catcherExplanation, escaperExplanation, catchername, escapername;
     private Button gameStart;
 
     //Instancevariables for welcomeScene
     private Label welcomeText, gameTitle;
     private Button playButton;
+
+    //Instancevariabels for setNameScene
     private Button nextButton;
-    private Label lblName;
-    private Label lblPlayer1;
-    private Label lblPlayer2;
-    private TextField txtPlayer1;
-    private TextField txtPlayer2;
+    private Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage;
+    private TextField txtPlayer1, txtPlayer2;
 
     //Konstruktor
     public GameFieldGUI(Stage primarystage) {
@@ -69,24 +67,30 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildExplainScene() {
 
         explainScenePane = new GridPane();
-        explainScene = new Scene(explainScenePane, 250, 160);
+        explainScene = new Scene(explainScenePane, 400, 300);
 
         //Initialize Nodes for Grid
         gameStart = new Button("Let's Go!");
+        catchername  = new Label(txtPlayer1.getText());
+        escapername = new Label(txtPlayer2.getText());
         explainTitle = new Label("How it Works...");
-        catcherExplanation = new Label("-Your aim is it catch the other Player by simply touching him \n- Controll with WASD \n-Throw Bananas with r");
-        escaperExplanation =  new Label("-Your aim is it to escape from the catcher until the Timer is done \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
+        catcherExplanation = new Label("-Your aim is it catch the other \nPlayer by simply touching him \n- Controll with WASD \n-Throw Bananas with r");
+        escaperExplanation =  new Label("-Your aim is it to escape from the \ncatcher until the Timer is done \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
         GridPane.setColumnSpan(explainTitle,2);
+
         //Put Nodes on Grid
         explainScenePane.add(explainTitle, 0,0);
-        explainScenePane.add(catcherExplanation, 0, 1);
-        explainScenePane.add(escaperExplanation, 1,1);
-        explainScenePane.add(gameStart, 0,2);
+        explainScenePane.add(catchername, 0, 1);
+        explainScenePane.add(escapername, 1, 1);
+        explainScenePane.add(catcherExplanation, 0, 2);
+        explainScenePane.add(escaperExplanation, 1,2);
+        explainScenePane.add(gameStart, 0,3);
         GridPane.setColumnSpan(gameStart, 2);
 
         //Some styling for Grid
         explainScenePane.getStylesheets().add(getClass().getResource("explainScene.css").toExternalForm());
         explainTitle.getStyleClass().add("explainTitle");
+        explainScenePane.setVgap(30);
 
         //Show explainScene
         primarystage.setScene(explainScene);
@@ -107,6 +111,11 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         lblPlayer2 = new Label("Player 2: ");
         txtPlayer1 = new TextField();
         txtPlayer2 = new TextField();
+        lblErrorMessage = new Label("No valid Names!");
+
+        //Action for next Button
+        nextButton.setOnAction(this);
+
 
         //Grid styling
         setNameScene.getStylesheets().add(getClass().getResource("setNameScene.css").toExternalForm());
@@ -140,6 +149,16 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         if (event.getSource() == playButton) {
             buildSetNameScene();
+        }
+        else if (event.getSource() == nextButton) {
+            if (!txtPlayer1.getText().equals("") && !txtPlayer2.getText().equals("")) {
+                buildExplainScene();
+            }
+            else {
+                setNameScenePane.add(lblErrorMessage, 0,4);
+                GridPane.setColumnSpan(lblErrorMessage, 2);
+
+            }
         }
     }
 }
