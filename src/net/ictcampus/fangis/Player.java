@@ -5,6 +5,9 @@ public class Player {
     private int bananaCount;
     private String playerRoll;
 
+    public Player(String name, String playerRoll) {
+    }
+
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
     }
