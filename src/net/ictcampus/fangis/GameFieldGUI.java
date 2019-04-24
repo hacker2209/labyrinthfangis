@@ -11,38 +11,46 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.awt.event.KeyEvent;
 
 public class GameFieldGUI implements EventHandler<ActionEvent> {
 
     //Instancevariabels for all Scenes
     Stage primarystage;
-    private Scene setNameScene, explainScene, welcomeScene, gameScene;
-    private BorderPane welcomeScenePane;
-    private GridPane setNameScenePane, explainScenePane, gameRasterPane, gameFieldPane;
+    Controller con;
+    protected Scene setNameScene, explainScene, welcomeScene, gameScene;
+    protected BorderPane welcomeScenePane;
+    protected GridPane setNameScenePane, explainScenePane, gameRasterPane;
+    protected Pane gameFieldPane;
 
 
     //Instancevariabels for explainScene
-    private Label explainTitle, catcherExplanation, escaperExplanation, catchername, escapername;
-    private Button gameStart;
+    protected Label explainTitle, catcherExplanation, escaperExplanation, catchername, escapername;
+    protected Button gameStart;
 
     //Instancevariables for welcomeScene
-    private Label welcomeText, gameTitle;
-    private Button playButton;
+    protected Label welcomeText, gameTitle;
+    protected Button playButton;
 
     //Instancevariabels for setNameScene
-    private Button nextButton;
-    private Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage, lblNothing;
-    private TextField txtPlayer1, txtPlayer2;
+    protected Button nextButton;
+    protected Label lblName, lblPlayer1, lblPlayer2, lblErrorMessage, lblNothing;
+    protected TextField txtPlayer1, txtPlayer2;
 
     //Instancevariabels for gameField
-    private Label lblScore, lblTimer;
-    private Button abrButton;
+    protected Label lblScore, lblTimer;
+    protected Button abrButton;
 
     //Konstruktor
-    public GameFieldGUI(Stage primarystage) {
+    public GameFieldGUI(Stage primarystage, Controller con) {
         this.primarystage = primarystage;
+        this.con = con;
     }
 
     public void buildWelcomeScene() {
@@ -56,7 +64,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         playButton = new Button("Play");
 
         //Define Buttonaction
-        playButton.setOnAction(this);
+        playButton.setOnAction(e -> con.handle(e));
 
         //Put Nodes on PaneT
         welcomeScenePane.setTop(gameTitle);
@@ -111,15 +119,13 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         explainScenePane.setHgap(30);
 
         //Define Button Actions
-        gameStart.setOnAction(this);
+        gameStart.setOnAction(e -> con.handle(e));
 
         //Show explainScene
         primarystage.setScene(explainScene);
         primarystage.show();
     }
-    /**
-     * Wechselt zur SetNameScene
-     */
+
     public void buildSetNameScene() {
 
         setNameScenePane = new GridPane();
@@ -136,8 +142,7 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         lblNothing = new Label();
 
         //Action for next Button
-        nextButton.setOnAction(this);
-
+        nextButton.setOnAction(e -> con.handle(e));
 
         //Grid styling
         setNameScene.getStylesheets().add(getClass().getResource("setNameScene.css").toExternalForm());
@@ -161,17 +166,27 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         setNameScenePane.add(txtPlayer2, 1, 2);
 
         //Define Button Action
-        nextButton.setOnAction(this);
+        nextButton.setOnAction(e -> con.handle(e));
 
         //Show Scene
         primarystage.setScene(setNameScene);
         primarystage.show();
     }
     public void buildGameField() {
-
         gameRasterPane = new GridPane();
-        gameFieldPane = new GridPane();
+        gameFieldPane = new Pane();
         gameScene = new Scene(gameRasterPane, 1000,600);
+        gameFieldPane.setMaxWidth(1000.0);
+        gameFieldPane.setMinHeight(400.0);
+
+
+        // need to attach KeyEvent caller to a Node of some sort.
+        // How about an invisible Box?
+//        final Box keyboardNode = new Box();
+////        keyboardNode.setFocusTraversable(true);
+////        keyboardNode.requestFocus();
+////        keyboardNode.setOnKeyPressed(e -> con.handle(e));
+////        gameFieldPane.getChildren().add(keyboardNode);
 
         //Initialize Nodes for Grid
         lblScore = new Label("The Score");
@@ -188,6 +203,13 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         gameRasterPane.add(lblScore,1,1);
         gameRasterPane.add(lblTimer, 2,1);
 
+        //Make Players
+        Player catcher = new Player(0,0,40,40,lblPlayer1.getText(),"catcher", Color.RED);
+        Player escaper = new Player(((int)gameFieldPane.getMaxWidth() - 40), 0,40,40,lblPlayer2.getText(), "escaper", Color.BLUE);
+        gameFieldPane.getChildren().add(escaper);
+        gameFieldPane.getChildren().add(catcher);
+
+
         //Put Nodes on Field
 
         //Show Scene
@@ -195,37 +217,137 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
         primarystage.show();
     }
 
-
     //Hanlde Methode für Buttonactions
-    @Override
-    public void handle(ActionEvent event) {
-        if (event.getSource() == playButton) {
-            buildSetNameScene();
-        }
-        else if (event.getSource() == nextButton) {
-            if (!txtPlayer1.getText().equals("") && !txtPlayer2.getText().equals("")) {
-                buildExplainScene();
-            }
-            else {
-                if (lblErrorMessage.getScene() == null) {
-                    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.1), lblErrorMessage);
-                    fadeTransition.setFromValue(1.0);
-                    fadeTransition.setToValue(0.0);
-                    fadeTransition.setCycleCount(Animation.INDEFINITE);
-                    fadeTransition.play();
-                setNameScenePane.add(lblErrorMessage, 0,4);
-                GridPane.setColumnSpan(lblErrorMessage, 2);
-                }
-                else {
-                    setNameScenePane.getChildren().remove(lblErrorMessage);
-                    setNameScenePane.add(lblErrorMessage, 0,4);
-                    GridPane.setColumnSpan(lblErrorMessage, 2);
-                }
+//    @Override
+//    public void handle(ActionEvent event) {
+//        con.handleevent(event);
+//    }
 
-            }
-        }
-        else if (event.getSource() == gameStart) {
-            buildGameField();
-        }
+    //------------------------------------------ Getter & Setter ----------------------------------------
+    //------------------------------------------ Getter & Setter ----------------------------------------
+    //------------------------------------------ Getter & Setter ----------------------------------------
+    //------------------------------------------ Getter & Setter ----------------------------------------
+    //------------------------------------------ Getter & Setter ----------------------------------------
+    //------------------------------------------ Getter & Setter ----------------------------------------
+    //------------------------------------------ Getter & Setter ----------------------------------------
+    public Stage getPrimarystage() {
+        return primarystage;
     }
+
+    public Scene getSetNameScene() {
+        return setNameScene;
+    }
+
+    public Scene getExplainScene() {
+        return explainScene;
+    }
+
+    public Scene getWelcomeScene() {
+        return welcomeScene;
+    }
+
+    public Scene getGameScene() {
+        return gameScene;
+    }
+
+    public BorderPane getWelcomeScenePane() {
+        return welcomeScenePane;
+    }
+
+    public GridPane getSetNameScenePane() {
+        return setNameScenePane;
+    }
+
+    public GridPane getExplainScenePane() {
+        return explainScenePane;
+    }
+
+    public GridPane getGameRasterPane() {
+        return gameRasterPane;
+    }
+
+    public Pane getGameFieldPane() {
+        return gameFieldPane;
+    }
+
+    public Label getExplainTitle() {
+        return explainTitle;
+    }
+
+    public Label getCatcherExplanation() {
+        return catcherExplanation;
+    }
+
+    public Label getEscaperExplanation() {
+        return escaperExplanation;
+    }
+
+    public Label getCatchername() {
+        return catchername;
+    }
+
+    public Label getEscapername() {
+        return escapername;
+    }
+
+    public Button getGameStart() {
+        return gameStart;
+    }
+
+    public Label getWelcomeText() {
+        return welcomeText;
+    }
+
+    public Label getGameTitle() {
+        return gameTitle;
+    }
+
+    public Button getPlayButton() {
+        return playButton;
+    }
+
+    public Button getNextButton() {
+        return nextButton;
+    }
+
+    public Label getLblName() {
+        return lblName;
+    }
+
+    public Label getLblPlayer1() {
+        return lblPlayer1;
+    }
+
+    public Label getLblPlayer2() {
+        return lblPlayer2;
+    }
+
+    public Label getLblErrorMessage() {
+        return lblErrorMessage;
+    }
+
+    public Label getLblNothing() {
+        return lblNothing;
+    }
+
+    public TextField getTxtPlayer1() {
+        return txtPlayer1;
+    }
+
+    public TextField getTxtPlayer2() {
+        return txtPlayer2;
+    }
+
+    public Label getLblScore() {
+        return lblScore;
+    }
+
+    public Label getLblTimer() {
+        return lblTimer;
+    }
+
+    public Button getAbrButton() {
+        return abrButton;
+    }
+
 }

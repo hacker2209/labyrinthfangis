@@ -1,31 +1,42 @@
 package net.ictcampus.fangis;
 
-public class Player {
-    private String playerName;
-    private int bananaCount;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
+public class Player extends Rectangle {
+    final String playerName;
     private String playerRoll;
 
-    public void setPlayerName(String playerName) {
+    //Constructor for Playerclass
+    public Player(int x, int y, int w, int h, String playerName, String playerRoll, Color color) {
+        //For Rectangle
+        super(w, h, color);
+
+        //Instancevariabels
         this.playerName = playerName;
-    }
-
-    public void setBananaCount(int bananaCount) {
-        this.bananaCount = bananaCount;
-    }
-
-    public void setPlayerRoll(String playerRoll) {
         this.playerRoll = playerRoll;
+
+        //Put Player on position
+        setTranslateX(x);
+        setTranslateY(y);
+
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public void moveLeft() {
+        setTranslateX(getTranslateX() - 5);
+    }
+    public void moveRight() {
+        setTranslateX(getTranslateX() + 5);
+    }
+    public void moveUp() {
+        setTranslateY(getTranslateY() - 5);
+    }
+    public void moveDown() {
+        setTranslateY(getTranslateY() + 5);
     }
 
-    public int getBananaCount() {
-        return bananaCount;
     }
 
-    public String getPlayerRoll() {
-        return playerRoll;
-    }
-}
+
+    //------------------------------ Getter & Setter --------------------------------------------
+
