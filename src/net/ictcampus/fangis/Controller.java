@@ -7,14 +7,12 @@ import static javafx.application.Application.launch;
 
 public class Controller extends Application {
 
-
     public static void main(String[] args) {
         launch(args);
     }
 
     public void start(Stage primarystage) {
         GameFieldGUI gui = new GameFieldGUI(primarystage);
-
         gui.buildWelcomeScene();
     }
 }
