@@ -69,11 +69,8 @@ public class GameFieldGUI implements EventHandler<ActionEvent> {
     public void buildExplainScene() {
 
         explainScenePane = new GridPane();
-<<<<<<< Updated upstream
         explainScene = new Scene(explainScenePane, 400, 300);
-=======
-        explainScene = new Scene(explainScenePane, 300, 160);
->>>>>>> Stashed changes
+
 
         //Initialize Nodes for Grid
         gameStart = new Button("Let's Go!");
