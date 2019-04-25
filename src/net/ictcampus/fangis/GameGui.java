@@ -8,11 +8,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 
 public class GameGui {
 
     //Instancevariabels for all Scenes
+    protected Controller con;
     protected Stage primarystage;
     protected Scene setNameScene, explainScene, welcomeScene, gameScene;
     protected BorderPane welcomeScenePane;
@@ -35,13 +37,16 @@ public class GameGui {
     //Instancevariabels for gameField
     protected Label lblScore, lblTimer;
     protected Button abrButton;
+    protected Box keyboardNode;
 
-    public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart) {
+    public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart, Box keyboardNode, Controller con) {
         this.primarystage = primarystage;
         this.playButton = playButton;
         this.nextButton = nextButton;
         this.abrButton = abrButton;
         this.gameStart = gameStart;
+        this.keyboardNode = keyboardNode;
+        this.con = con;
     }
 
     public void buildWelcomeScreen() {
@@ -155,9 +160,12 @@ public class GameGui {
         gameRasterPane.add(abrButton,0,1);
         gameRasterPane.add(lblScore,1,1);
         gameRasterPane.add(lblTimer, 2,1);
+        //-------------Put nodes on Field
+        gameFieldPane.getChildren().add(keyboardNode);
         //Make Players
-        Player catcher = new Player(0,0,40,40,lblPlayer1.getText(),"catcher", Color.RED);
-        Player escaper = new Player(((int)gameFieldPane.getMaxWidth() - 40), 0,40,40,lblPlayer2.getText(), "escaper", Color.BLUE);
+        Player catcher = new Player(0,0, lblPlayer1.getText(),"catcher", Color.RED, 10, 10, 50,50,45,270);
+        Player escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 0, lblPlayer2.getText(), "escaper", Color.BLUE, 10,10,50,50,45,270);
+        con.setPlayers(catcher, escaper);
         gameFieldPane.getChildren().add(escaper);
         gameFieldPane.getChildren().add(catcher);
         //Show Scene

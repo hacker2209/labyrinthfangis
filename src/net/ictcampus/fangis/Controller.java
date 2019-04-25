@@ -6,19 +6,21 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Box;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.awt.event.KeyListener;
 
-public class Controller extends Application implements EventHandler<ActionEvent> { //KeyListener {
+public class Controller extends Application implements EventHandler<ActionEvent> {
 
     private Button playButton, nextButton, abrButton, gameStart;
-
     public static void main(String[] args) {
         launch(args);
     }
+    public Box keyboardNode = new Box();
+    public Player catcher, escaper;
 
     private GameGui gui;
     @Override
@@ -27,14 +29,26 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         gameStart = new Button("Let's Go!");
         nextButton = new Button("Next");
         abrButton = new Button("Abbrechen");
-        gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart);
-        gui.buildWelcomeScreen();
-        playButton.setOnAction(this);
-        nextButton.setOnAction(this);
-        gameStart.setOnAction(this);
+        try {
+            gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart, keyboardNode, this);
+            gui.buildWelcomeScreen();
+            playButton.setOnAction(this);
+            nextButton.setOnAction(this);
+            gameStart.setOnAction(this);
+            // need to attach KeyEvent caller to a Node of some sort.
+            // How about an invisible Box?
+            keyboardNode.setFocusTraversable(true);
+            keyboardNode.requestFocus();
+            keyboardNode.setOnKeyPressed(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-
+    protected void setPlayers(Player catcher, Player escaper) {
+        this.catcher = catcher;
+        this.escaper = escaper;
+    }
 
     @Override
     public void handle(ActionEvent event) {
@@ -67,58 +81,25 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         }
     }
 
+    @Override
+    public void keyTyped(KeyEvent e) {
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+                escaper.moveUp();
+                break;
+            case KeyEvent.VK_DOWN:
+                escaper.moveDown();
+                break;
+        }
+    }
 
+    @Override
+    public void keyPressed(KeyEvent e) {
 
+    }
 
-    //Handels all events
+    @Override
+    public void keyReleased(KeyEvent e) {
 
-//    //Hanlde Methode für Buttonactions
-//    public void handle(ActionEvent event) {
-//        if (event.getSource() == playButton) {
-//            buildSetNameScene();
-//        }
-//        else if (event.getSource() == nextButton) {
-//            if (!txtPlayer1.getText().equals("") && !txtPlayer2.getText().equals("")) {
-//                buildExplainScene();
-//            }
-//            else {
-//                if (lblErrorMessage.getScene() == null) {
-//                    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.1), lblErrorMessage);
-//                    fadeTransition.setFromValue(1.0);
-//                    fadeTransition.setToValue(0.0);
-//                    fadeTransition.setCycleCount(Animation.INDEFINITE);
-//                    fadeTransition.play();
-//                    setNameScenePane.add(lblErrorMessage, 0,4);
-//                    GridPane.setColumnSpan(lblErrorMessage, 2);
-//                }
-//                else {
-//                    setNameScenePane.getChildren().remove(lblErrorMessage);
-//                    setNameScenePane.add(lblErrorMessage, 0,4);
-//                    GridPane.setColumnSpan(lblErrorMessage, 2);
-//                }
-//
-//            }
-//        }
-//        else if (event.getSource() == gameStart) {
-//            buildGameField();
-//        }
-//    }
-//
-//    @Override
-//    public void keyTyped(KeyEvent e) {
-//        switch(e.getKeyCode()) {
-//            case KeyEvent.VK_B:
-//                animator.stop();
-//        }
-//    }
-//
-//    @Override
-//    public void keyPressed(KeyEvent e) {
-//
-//    }
-//
-//    @Override
-//    public void keyReleased(KeyEvent e) {
-//
-//    }
+    }
 }
