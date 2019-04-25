@@ -24,16 +24,36 @@ public class Player extends Arc {
 
     //Spieler bewegen
     public void moveLeft() {
-        setTranslateX(getTranslateX() - 5);
+        if (playerRoll.equals("catcher")) {
+            setTranslateX(getTranslateX() - 10);
+        }
+        else {
+            setTranslateX(getTranslateX() - 9);
+        }
     }
     public void moveRight() {
-        setTranslateX(getTranslateX() + 5);
+        if (playerRoll.equals("catcher")) {
+            setTranslateX(getTranslateX() + 10);
+        }
+        else {
+            setTranslateX(getTranslateX() + 9);
+        }
     }
     public void moveUp() {
-        setTranslateY(getTranslateY() - 5);
+        if (playerRoll.equals("catcher")) {
+            setTranslateY(getTranslateY() - 10);
+        }
+        else {
+            setTranslateY(getTranslateY() - 9);
+        }
     }
     public void moveDown() {
-        setTranslateY(getTranslateY() + 5);
+        if (playerRoll.equals("catcher")) {
+            setTranslateY(getTranslateY() + 10);
+        }
+        else {
+            setTranslateY(getTranslateY() + 9);
+        }
     }
 
 

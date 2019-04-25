@@ -19,10 +19,10 @@ public class Controller extends Application implements EventHandler<ActionEvent>
 
     //Instancevariabels
     private Button playButton, nextButton, abrButton, gameStart;
-    public Box keyboardNode = new Box();
-    public Player catcher, escaper;
+    protected Box keyboardNode = new Box();
+    protected Player catcher, escaper;
     private GameGui gui;
-    private AnimationTimer ani;
+    protected AnimationTimer anicatcher, aniescaper;
 
     public static void main(String[] args) {
         launch(args);
@@ -40,14 +40,21 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             playButton.setOnAction(this);
             nextButton.setOnAction(this);
             gameStart.setOnAction(this);
-            Keyhandler keyhandler = new Keyhandler(gui);
+            Keyhandler keyhandler = new Keyhandler(gui, this);
             // need to attach KeyEvent caller to a Node of some sort.
             // How about an invisible Box?
             keyboardNode.setFocusTraversable(true);
-            keyboardNode.requestFocus();
-            ani = new AnimationTimer(){
+//            keyboardNode.requestFocus();
+            anicatcher = new AnimationTimer(){
                 @Override
-                public void handle(long arg0) {
+                public void handle(long now) {
+                    keyboardNode.setOnKeyPressed(e -> keyhandler.handle(e));
+                    // UPDATE
+                }
+            };
+            aniescaper = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
                     keyboardNode.setOnKeyPressed(e -> keyhandler.handle(e));
                     // UPDATE
                 }
@@ -90,7 +97,8 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         }
         else if (event.getSource() == gameStart) {
             gui.buildGameFieldScreen();
-            ani.start();
+            anicatcher.start();
+            aniescaper.start();
         }
     }
 

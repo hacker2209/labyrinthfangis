@@ -158,14 +158,14 @@ public class GameGui {
         setNameScene.getStylesheets().add(getClass().getResource("gameField.css").toExternalForm());
         //Put Nodes on Raster
         gameRasterPane.add(gameFieldPane,0,0);
-        gameRasterPane.add(abrButton,0,1);
+//        gameRasterPane.add(abrButton,0,1);
         gameRasterPane.add(lblScore,1,1);
         gameRasterPane.add(lblTimer, 2,1);
         //-------------Put nodes on Field
         gameFieldPane.getChildren().add(keyboardNode);
         //Make Players
-        catcher = new Player(10,10, lblPlayer1.getText(),"catcher", Color.RED, 5, 5, 20,20,45,270);
-        escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 10, lblPlayer2.getText(), "escaper", Color.BLUE, 5,5,20,20,45,270);
+        catcher = new Player(10,10, lblPlayer1.getText(),"catcher", Color.RED, 5, 5, 15,15,45,270);
+        escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 10, lblPlayer2.getText(), "escaper", Color.BLUE, 5,5,15,15,45,270);
         con.setPlayers(catcher, escaper);
         gameFieldPane.getChildren().add(escaper);
         gameFieldPane.getChildren().add(catcher);
