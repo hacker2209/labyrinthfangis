@@ -1,9 +1,11 @@
 package net.ictcampus.fangis;
 
 import javafx.animation.Animation;
+import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
@@ -15,14 +17,17 @@ import javafx.util.Duration;
 
 public class Controller extends Application implements EventHandler<ActionEvent> {
 
+    //Instancevariabels
     private Button playButton, nextButton, abrButton, gameStart;
+    public Box keyboardNode = new Box();
+    public Player catcher, escaper;
+    private GameGui gui;
+    private AnimationTimer ani;
+
     public static void main(String[] args) {
         launch(args);
     }
-    public Box keyboardNode = new Box();
-    public Player catcher, escaper;
 
-    private GameGui gui;
     @Override
     public void start(Stage primaryStage) throws Exception {
         playButton = new Button("Play");
@@ -35,11 +40,18 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             playButton.setOnAction(this);
             nextButton.setOnAction(this);
             gameStart.setOnAction(this);
+            Keyhandler keyhandler = new Keyhandler(gui);
             // need to attach KeyEvent caller to a Node of some sort.
             // How about an invisible Box?
             keyboardNode.setFocusTraversable(true);
             keyboardNode.requestFocus();
-            keyboardNode.setOnKeyPressed(this);
+            ani = new AnimationTimer(){
+                @Override
+                public void handle(long arg0) {
+                    keyboardNode.setOnKeyPressed(e -> keyhandler.handle(e));
+                    // UPDATE
+                }
+            };
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,28 +90,9 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         }
         else if (event.getSource() == gameStart) {
             gui.buildGameFieldScreen();
+            ani.start();
         }
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
-        switch(e.getKeyCode()) {
-            case KeyEvent.VK_UP:
-                escaper.moveUp();
-                break;
-            case KeyEvent.VK_DOWN:
-                escaper.moveDown();
-                break;
-        }
-    }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 }

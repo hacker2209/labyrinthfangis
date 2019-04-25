@@ -38,6 +38,7 @@ public class GameGui {
     protected Label lblScore, lblTimer;
     protected Button abrButton;
     protected Box keyboardNode;
+    protected Player catcher, escaper;
 
     public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart, Box keyboardNode, Controller con) {
         this.primarystage = primarystage;
@@ -163,8 +164,8 @@ public class GameGui {
         //-------------Put nodes on Field
         gameFieldPane.getChildren().add(keyboardNode);
         //Make Players
-        Player catcher = new Player(0,0, lblPlayer1.getText(),"catcher", Color.RED, 10, 10, 50,50,45,270);
-        Player escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 0, lblPlayer2.getText(), "escaper", Color.BLUE, 10,10,50,50,45,270);
+        catcher = new Player(10,10, lblPlayer1.getText(),"catcher", Color.RED, 5, 5, 20,20,45,270);
+        escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 10, lblPlayer2.getText(), "escaper", Color.BLUE, 5,5,20,20,45,270);
         con.setPlayers(catcher, escaper);
         gameFieldPane.getChildren().add(escaper);
         gameFieldPane.getChildren().add(catcher);

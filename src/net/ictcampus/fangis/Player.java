@@ -36,8 +36,23 @@ public class Player extends Arc {
         setTranslateY(getTranslateY() + 5);
     }
 
-    }
 
 
     //------------------------------ Getter & Setter --------------------------------------------
 
+    public String getPlayerName() {
+        return playerName;
+    }
+    public String getPlayerRoll() {
+        return playerRoll;
+    }
+    public void setPlayerRoll(String playerRoll) {
+        this.playerRoll = playerRoll;
+    }
+
+
+
+
+
+
+}
