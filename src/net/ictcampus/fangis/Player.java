@@ -1,27 +1,28 @@
 package net.ictcampus.fangis;
 
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 
-public class Player extends Rectangle {
+public class Player extends Arc {
     final String playerName;
     private String playerRoll;
 
     //Constructor for Playerclass
-    public Player(int x, int y, int w, int h, String playerName, String playerRoll, Color color) {
+    public Player(int x, int y, String playerName, String playerRoll, Color color, double CenterX, double CenterY, double RadiusX, double RadiusY, double StartAngle, double ArcLenght) {
         //For Rectangle
-        super(w, h, color);
-
+        super(CenterX, CenterY, RadiusX, RadiusY, StartAngle, ArcLenght);
+        super.setType(ArcType.ROUND);
         //Instancevariabels
         this.playerName = playerName;
         this.playerRoll = playerRoll;
-
         //Put Player on position
         setTranslateX(x);
         setTranslateY(y);
 
     }
 
+    //Spieler bewegen
     public void moveLeft() {
         setTranslateX(getTranslateX() - 5);
     }

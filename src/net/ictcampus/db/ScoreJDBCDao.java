@@ -5,6 +5,10 @@ import net.ictcampus.fangis.Player;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.paint.Color;
+
+
+import static javax.print.attribute.standard.Chromaticity.COLOR;
 
 public class ScoreJDBCDao implements ScoreDao {
     private Connection con = null;
@@ -28,13 +32,14 @@ public class ScoreJDBCDao implements ScoreDao {
 
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("id_rolle");
-                all.add(new Player(rs.getString("Username"), rs.getString("rolleName")));
-            }
+//            while (rs.next()) {
+//                int id = rs.getInt("id_rolle");
+//                all.add(new Player(200,200,40,40, rs.getString("Username"), rs.getString("rolleName"), Color.BLUE);
+//            }
             closeConnection();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
             e.printStackTrace();
         }
         return all;
