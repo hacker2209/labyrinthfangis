@@ -47,6 +47,8 @@ public class Keyhandler implements EventHandler<KeyEvent> {
                 con.anicatcher.stop();
                 con.aniescaper.stop();
                 gui.buildWelcomeScreen();
+                break;
+
         }
     }
 }
