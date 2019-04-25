@@ -10,7 +10,7 @@ public class GameObject extends Rectangle{
 
     }
 
-    public void  randomPosition{
+    public void  randomPosition(){
         Random rand = new Random();
         int x = rand.nextInt(900);
         int y = rand.nextInt(500);
