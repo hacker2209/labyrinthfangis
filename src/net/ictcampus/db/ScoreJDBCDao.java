@@ -30,7 +30,7 @@ public class ScoreJDBCDao implements ScoreDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id_rolle");
-                all.add(new Player(rs.getString("Username"), rs.getString("rolleName")));
+                //all.add(new Player(rs.getString("Username"), rs.getString("rolleName")));
             }
             closeConnection();
         } catch (SQLException e) {
