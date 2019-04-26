@@ -7,12 +7,14 @@ import javafx.scene.shape.ArcType;
 public class Player extends Arc {
     final String playerName;
     private String playerRoll;
+    protected boolean catched = false;
 
     //Constructor for Playerclass
     public Player(int x, int y, String playerName, String playerRoll, Color color, double CenterX, double CenterY, double RadiusX, double RadiusY, double StartAngle, double ArcLenght) {
         //For Rectangle
         super(CenterX, CenterY, RadiusX, RadiusY, StartAngle, ArcLenght);
         super.setType(ArcType.ROUND);
+        super.setFill(color);
         //Instancevariabels
         this.playerName = playerName;
         this.playerRoll = playerRoll;
@@ -22,37 +24,41 @@ public class Player extends Arc {
 
     }
 
+    public void catched() {
+        catched = true;
+    }
+
     //Spieler bewegen
     public void moveLeft() {
         if (playerRoll.equals("catcher")) {
-            setTranslateX(getTranslateX() - 2);
+            setTranslateX(getTranslateX() - 15);
         }
         else {
-            setTranslateX(getTranslateX() - 1);
+            setTranslateX(getTranslateX() - 14);
         }
     }
     public void moveRight() {
         if (playerRoll.equals("catcher")) {
-            setTranslateX(getTranslateX() + 2);
+            setTranslateX(getTranslateX() + 14);
         }
         else {
-            setTranslateX(getTranslateX() + 1);
+            setTranslateX(getTranslateX() + 15);
         }
     }
     public void moveUp() {
         if (playerRoll.equals("catcher")) {
-            setTranslateY(getTranslateY() - 2);
+            setTranslateY(getTranslateY() - 14);
         }
         else {
-            setTranslateY(getTranslateY() - 1);
+            setTranslateY(getTranslateY() - 15);
         }
     }
     public void moveDown() {
         if (playerRoll.equals("catcher")) {
-            setTranslateY(getTranslateY() + 2);
+            setTranslateY(getTranslateY() + 15);
         }
         else {
-            setTranslateY(getTranslateY() + 1);
+            setTranslateY(getTranslateY() + 14);
         }
     }
 

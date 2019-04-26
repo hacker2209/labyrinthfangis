@@ -48,8 +48,15 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             ani = new AnimationTimer(){
                 @Override
                 public void handle(long now) {
+                    if (escaper.catched) {
+                        ani.stop();
+                        gui.buildGameOverScreen();
+                    }
 //                    keyboardNode.setOnKeyReleased(e -> keyhandler.releasehandle(e));
                     keyboardNode.setOnKeyPressed(e -> keyhandler.handle(e));
+                    if (catcher.getTranslateX() == (escaper.getTranslateX() - 20) || catcher.getTranslateX() == (escaper.getTranslateX() + 20)) {
+                        escaper.catched();
+                    }
                     // UPDATE
                 }
             };
