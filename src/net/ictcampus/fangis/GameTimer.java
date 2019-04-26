@@ -26,23 +26,34 @@ public class GameTimer {
 //    };
 
 
-    public void countStart() {
+    public void countStart(GameGui gui) {
+        this.gui=gui;
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                while (timeLeftMilliseconds >= 0) {
-                    int minute = (int) (timeLeftMilliseconds / 1000) / 60;
-                    int second = (int) (timeLeftMilliseconds / 1000) % 60;
-                            gui.lblTimer.setText(minute + ":" + second);
-                    timeLeftMilliseconds--;
-                }
+                Platform.runLater(() -> {
+                    if (timeLeftMilliseconds > 0) {
+                        showTimer();
+                        timeLeftMilliseconds -= 1000;
+                        System.out.println(timeLeftMilliseconds);
+                    } else {
+                        gui.buildGameOverScreen();
+                        gui.gameOverText.setText("Looks like the escaper has Won");
+                        timer.cancel();
+                    }
+                });
+
             }
-        }, 1000);
+        }, 0,1000);
     }
 
     public void showTimer() {
-
+        int minute = (int) (timeLeftMilliseconds / 1000) / 60;
+        int second = (int) (timeLeftMilliseconds / 1000) % 60;
+        gui.lblTimer.setText(minute + ":" + second);
+        System.out.println(minute + ":" + second);
+        //System.out.println(timeLeftMilliseconds);
     }
 
 }

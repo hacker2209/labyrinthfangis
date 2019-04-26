@@ -44,8 +44,8 @@ public class GameGui {
     protected GameTimer gameTimer;
 
     //Instancevariabels for gameOver
-    private Label gameOverText, gameOverTitle;
-    private Button gameQuitButton;
+    protected Label gameOverText, gameOverTitle;
+    protected Button gameQuitButton;
 
     public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart, Box keyboardNode, Controller con) {
         this.primarystage = primarystage;
@@ -160,7 +160,7 @@ public class GameGui {
         gameFieldPane.setMinHeight(400.0);
         //Initialize Nodes for Grid
         lblScore = new Label("The Score");
-        lblTimer = new Label("3:00");
+        lblTimer = new Label();
         //Grid Styling
         setNameScene.getStylesheets().add(getClass().getResource("gameField.css").toExternalForm());
         gameFieldPane.getStyleClass().add("pane");
@@ -180,7 +180,7 @@ public class GameGui {
         //Show Scene
         primarystage.setScene(gameScene);
         gameTimer=new GameTimer();
-        gameTimer.countStart();
+        gameTimer.countStart(this);
         primarystage.show();
     }
 
