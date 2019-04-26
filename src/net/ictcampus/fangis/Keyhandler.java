@@ -48,36 +48,44 @@ public class Keyhandler implements EventHandler<KeyEvent> {
     public void handle(KeyEvent e) {
         switch (e.getCode()) {
             case UP:
-                th00 = new aniThreads("up", gui);
-                th00.start();
+//                th00 = new aniThreads("up", gui);
+//                th00.start();
+                gui.escaper.moveUp();
                 break;
             case DOWN:
-                th01 = new aniThreads("down", gui);
-                th01.start();
+//                th01 = new aniThreads("down", gui);
+//                th01.start();
+                gui.escaper.moveDown();
                 break;
             case LEFT:
-                th02 = new aniThreads("left", gui);
-                th02.start();
+//                th02 = new aniThreads("left", gui);
+//                th02.start();
+                gui.escaper.moveLeft();
                 break;
             case RIGHT:
-                th03 = new aniThreads("right", gui);
-                th03.start();
+//                th03 = new aniThreads("right", gui);
+//                th03.start();
+                gui.escaper.moveRight();
                 break;
             case W:
-                th04 = new aniThreads("w", gui);
-                th04.start();
+//                th04 = new aniThreads("w", gui);
+//                th04.start();
+                gui.catcher.moveUp();
                 break;
             case A:
-                th05 = new aniThreads("a", gui);
-                th05.start();
+//                th05 = new aniThreads("a", gui);
+//                th05.start();
+                gui.catcher.moveLeft();
                 break;
             case D:
-                th06 = new aniThreads("d", gui);
-                th06.start();
+//                th06 = new aniThreads("d", gui);
+//                th06.start();
+                gui.catcher.moveRight();
                 break;
             case S:
-                th07 = new aniThreads("s", gui);
-                th07.start();
+//                th07 = new aniThreads("s", gui);
+//                th07.start();
+                gui.catcher.moveDown();
                 break;
             case B:
                 con.ani.stop();
