@@ -23,6 +23,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
     protected Player catcher, escaper;
     private GameGui gui;
     protected AnimationTimer ani;
+    protected GameTimer  gameTimer;
 
     public static void main(String[] args) {
         launch(args);
@@ -98,6 +99,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         }
         else if (event.getSource() == gameStart) {
             gui.buildGameFieldScreen();
+
             ani.start();
         }
     }

@@ -41,6 +41,7 @@ public class GameGui {
     protected Button abrButton;
     protected Box keyboardNode;
     protected Player catcher, escaper;
+    protected GameTimer gameTimer;
 
     //Instancevariabels for gameOver
     private Label gameOverText, gameOverTitle;
@@ -178,6 +179,8 @@ public class GameGui {
         gameFieldPane.getChildren().add(catcher);
         //Show Scene
         primarystage.setScene(gameScene);
+        gameTimer=new GameTimer();
+        gameTimer.countStart();
         primarystage.show();
     }
 
