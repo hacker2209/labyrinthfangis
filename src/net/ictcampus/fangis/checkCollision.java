@@ -27,7 +27,7 @@ public class checkCollision extends Thread {
                         int catx = (int) con.catcher.getTranslateX();
                         int escy = (int) con.escaper.getTranslateY();
                         int escx = (int) con.escaper.getTranslateX();
-                        gui.lblTimer.setText("Catcher Y: " + caty + "Catcher X: " + catx + "Escaper Y: " + escy + "Escaper X: " + escx);
+                        //gui.lblTimer.setText("Catcher Y: " + caty + "Catcher X: " + catx + "Escaper Y: " + escy + "Escaper X: " + escx);
                         if (con.catcher.getBoundsInParent().intersects(con.escaper.getBoundsInParent()))  {
                             terminate();
                         }
