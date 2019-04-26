@@ -48,6 +48,9 @@ public class Keyhandler implements EventHandler<KeyEvent> {
                 con.aniescaper.stop();
                 gui.buildWelcomeScreen();
                 break;
+            case R:
+                gui.throwBanana(gui.catcher.getTranslateX(),gui.catcher.getTranslateY());
+                break;
 
         }
     }

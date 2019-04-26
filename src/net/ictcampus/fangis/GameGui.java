@@ -4,6 +4,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -35,7 +37,7 @@ public class GameGui {
     protected TextField txtPlayer1, txtPlayer2;
 
     //Instancevariabels for gameField
-    protected Label lblScore, lblTimer;
+    protected Label lblScore, lblTimer, lblBanana;
     protected Button abrButton;
     protected Box keyboardNode;
     protected Player catcher, escaper;
@@ -172,6 +174,15 @@ public class GameGui {
         //Show Scene
         primarystage.setScene(gameScene);
         primarystage.show();
+    }
+
+    public void throwBanana(double x, double y){
+        Image image = new Image(getClass().getResourceAsStream("img/banana.png"));
+        lblBanana = new Label();
+        lblBanana.setGraphic(new ImageView(image));
+        gameFieldPane.getChildren().add(lblBanana);
+        lblBanana.setTranslateX(x);
+        lblBanana.setTranslateY(y);
     }
 }
 
