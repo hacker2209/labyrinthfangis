@@ -25,7 +25,6 @@ public class Controller extends Application implements EventHandler<ActionEvent>
     protected AnimationTimer ani;
     protected GameTimer  gameTimer;
     private checkCollision coli;
-    private WallCollision walli;
     private Keyhandler keyhandler;
     private gameObejctGenerator gobi;
 
@@ -51,7 +50,6 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             gobi = new gameObejctGenerator(gui);
             keyhandler = new Keyhandler(gui, this);
             coli = new checkCollision(this, gui);
-            walli = new WallCollision(this,gui);
             gobi.createObstacle(10);
 //            System.out.println(gobi.randomXPosition());
 //            System.out.println(gobi.obstacles);

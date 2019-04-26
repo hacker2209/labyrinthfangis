@@ -31,6 +31,13 @@ public class checkCollision extends Thread {
                         if (con.catcher.getBoundsInParent().intersects(con.escaper.getBoundsInParent()))  {
                             terminate();
                         }
+                        else if (con.escaper.getTranslateX() < 0 || con.escaper.getTranslateY()>0) {
+
+
+                        }
+                        else if(con.escaper.getTranslateX() < 0 || con.escaper.getTranslateY()>0){
+
+                        }
                     }
                 };
                 animationTimer.start();
