@@ -18,46 +18,52 @@ import javafx.util.Duration;
 public class Controller extends Application implements EventHandler<ActionEvent> {
 
     //Instancevariabels
-    private Button playButton, nextButton, abrButton, gameStart;
+    private Button playButton, nextButton, abrButton, gameStart, gameQuitButton;
     protected Box keyboardNode = new Box();
     protected Player catcher, escaper;
     private GameGui gui;
     protected AnimationTimer ani;
     protected GameTimer  gameTimer;
+    private checkCollision coli;
+    private Keyhandler keyhandler;
+    private gameObejctGenerator gobi;
 
     public static void main(String[] args) {
         launch(args);
     }
 
+    //Real Main logic, looks for Buttonactions, has AnimatorTimer for Game...
     @Override
     public void start(Stage primaryStage) throws Exception {
         playButton = new Button("Play");
         gameStart = new Button("Let's Go!");
         nextButton = new Button("Next");
         abrButton = new Button("Abbrechen");
+        gameQuitButton = new Button("Quit");
         try {
-            gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart, keyboardNode, this);
+            gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart, keyboardNode,gameQuitButton,  this);
             gui.buildWelcomeScreen();
             playButton.setOnAction(this);
             nextButton.setOnAction(this);
             gameStart.setOnAction(this);
-            Keyhandler keyhandler = new Keyhandler(gui, this);
+            gameQuitButton.setOnAction(this);
+            gobi = new gameObejctGenerator(gui);
+            keyhandler = new Keyhandler(gui, this);
+            coli = new checkCollision(this, gui);
+            gobi.createObstacle(10);
+//            System.out.println(gobi.randomXPosition());
+//            System.out.println(gobi.obstacles);
             // need to attach KeyEvent caller to a Node of some sort.
             // How about an invisible Box?
             keyboardNode.setFocusTraversable(true);
             keyboardNode.requestFocus();
+
+            //Make Thread for Collisioncheck
             ani = new AnimationTimer(){
                 @Override
                 public void handle(long now) {
-                    if (escaper.catched) {
-                        ani.stop();
-                        gui.buildGameOverScreen();
-                    }
 //                    keyboardNode.setOnKeyReleased(e -> keyhandler.releasehandle(e));
                     keyboardNode.setOnKeyPressed(e -> keyhandler.handle(e));
-                    if (catcher.getTranslateX() == (escaper.getTranslateX() - 20) || catcher.getTranslateX() == (escaper.getTranslateX() + 20)) {
-                        escaper.catched();
-                    }
                     // UPDATE
                 }
             };
@@ -66,11 +72,14 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         }
     }
 
+
+    //Players are created by GameGui hwo gives them back to the Controller with this method
     protected void setPlayers(Player catcher, Player escaper) {
         this.catcher = catcher;
         this.escaper = escaper;
     }
 
+    //Handle method for Buttonactions
     @Override
     public void handle(ActionEvent event) {
         if (event.getSource() == playButton) {
@@ -101,6 +110,11 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             gui.buildGameFieldScreen();
 
             ani.start();
+            coli.start();
+//            coli.gugus();
+        }
+        else if (event.getSource() == gameQuitButton) {
+            gui.primarystage.close();
         }
     }
 

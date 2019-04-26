@@ -1,0 +1,18 @@
+.gameOverTitle {
+    -fx-text-alignment: center;
+    -fx-font-size: 2em;
+    -fx-font-family: "Courier New", Courier, monospace;
+}
+
+.gameQuitButton {
+    -fx-margin: 10px;
+    -fx-font-family: "Courier New", Courier, monospace;
+}
+
+.pane {
+    -fx-padding: 10px;
+
+}
+.gameOvertext{
+    -fx-font-family: "Courier New", Courier, monospace;
+}

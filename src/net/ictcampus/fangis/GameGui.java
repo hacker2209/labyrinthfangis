@@ -47,13 +47,14 @@ public class GameGui {
     protected Label gameOverText, gameOverTitle;
     protected Button gameQuitButton;
 
-    public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart, Box keyboardNode, Controller con) {
+    public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart, Box keyboardNode, Button gameQuitButton, Controller con) {
         this.primarystage = primarystage;
         this.playButton = playButton;
         this.nextButton = nextButton;
         this.abrButton = abrButton;
         this.gameStart = gameStart;
         this.keyboardNode = keyboardNode;
+        this.gameQuitButton = gameQuitButton;
         this.con = con;
     }
 
@@ -69,7 +70,7 @@ public class GameGui {
         gameOverPane.setBottom(playButton);
         gameOverPane.setCenter(welcomeText);
         //Add some Style to welcomeScene
-        welcomeScene.getStylesheets().add(getClass().getResource("welcomeScene.css").toExternalForm());
+        welcomeScene.getStylesheets().add(getClass().getResource("css/welcomeScene.css").toExternalForm());
         gameTitle.getStyleClass().add("gameTitle");
         playButton.getStyleClass().add("playButton");
         gameOverPane.getStyleClass().add("pane");
@@ -102,7 +103,7 @@ public class GameGui {
         explainScenePane.add(gameStart, 0,3);
         GridPane.setColumnSpan(gameStart, 2);
         //Some styling for Grid
-        explainScenePane.getStylesheets().add(getClass().getResource("explainScene.css").toExternalForm());
+        explainScenePane.getStylesheets().add(getClass().getResource("css/explainScene.css").toExternalForm());
         explainTitle.getStyleClass().add("explainTitle");
         explainScenePane.getStyleClass().add("pane");
         catcherExplanation.getStyleClass().add("explan");
@@ -129,7 +130,7 @@ public class GameGui {
         lblErrorMessage = new Label("No valid Names!");
         lblNothing = new Label();
         //Grid styling
-        setNameScene.getStylesheets().add(getClass().getResource("setNameScene.css").toExternalForm());
+        setNameScene.getStylesheets().add(getClass().getResource("css/setNameScene.css").toExternalForm());
         lblName.getStyleClass().add("nameTitle");
         setNameScenePane.getStyleClass().add("pane");
         nextButton.getStyleClass().add("button");
@@ -162,7 +163,7 @@ public class GameGui {
         lblScore = new Label("The Score");
         lblTimer = new Label();
         //Grid Styling
-        setNameScene.getStylesheets().add(getClass().getResource("gameField.css").toExternalForm());
+        setNameScene.getStylesheets().add(getClass().getResource("css/gameField.css").toExternalForm());
         gameFieldPane.getStyleClass().add("pane");
         //Put Nodes on Raster
         gameRasterPane.add(gameFieldPane,0,0);
@@ -188,22 +189,21 @@ public class GameGui {
         gameOverPane = new BorderPane();
         gameOverScene = new Scene(gameOverPane, 300, 160);
         //Create Nodes for welcomeScene
-        gameOverText = new Label("Welcome to our Labyrinth-Fanigs Game!\nThis is a simple Game\nmade by zauggmo and Technat314");
-        gameOverTitle = new Label("Labyrinth-Fangis");
-        gameQuitButton = new Button("Quit");
+        gameOverText = new Label("Tatata, the Game is over, \nthe Catcher won!");
+        gameOverTitle = new Label("GameOver");
 
         //Put Nodes on PaneT
         gameOverPane.setTop(gameOverTitle);
         gameOverPane.setBottom(gameQuitButton);
         gameOverPane.setCenter(gameOverText);
         //Add some Style to welcomeScene
-        gameOverScene.getStylesheets().add(getClass().getResource("gameOverScene.css").toExternalForm());
-        gameTitle.getStyleClass().add("gameTitle");
-        playButton.getStyleClass().add("playButton");
+        gameOverScene.getStylesheets().add(getClass().getResource("css/gameOverScene.css").toExternalForm());
+        gameOverTitle.getStyleClass().add("gameOverTitle");
+        gameQuitButton.getStyleClass().add("gameQuitButton");
         gameOverPane.getStyleClass().add("pane");
-        welcomeText.getStyleClass().add("text");
+        gameOverText.getStyleClass().add("gameOvertext");
         //Show welcomeScene
-        primarystage.setScene(welcomeScene);
+        primarystage.setScene(gameOverScene);
         primarystage.show();
     }
 
