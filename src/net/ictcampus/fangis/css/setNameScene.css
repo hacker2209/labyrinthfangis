@@ -1,0 +1,23 @@
+.nameTitle {
+    -fx-text-alignment: center;
+    -fx-font-size: 1.5em;
+    -fx-font-family: "Courier New", Courier, monospace;
+}
+
+.pane {
+    -fx-padding: 10px;
+}
+
+.button {
+    -fx-font-size: 15px;
+    -fx-font-family: "Courier New", Courier, monospace;
+}
+.player{
+    -fx-font-family: "Courier New", Courier, monospace;
+}
+.error {
+    -fx-font-family: "Courier New", Courier, monospace;
+    -fx-font-size: 2em;
+    -fx-text-fill: red;
+    -fx-text-decoration:blink;
+}
