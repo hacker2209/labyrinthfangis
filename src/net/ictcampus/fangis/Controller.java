@@ -22,7 +22,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
     protected Box keyboardNode = new Box();
     protected Player catcher, escaper;
     private GameGui gui;
-    protected AnimationTimer anicatcher, aniescaper;
+    protected AnimationTimer ani;
 
     public static void main(String[] args) {
         launch(args);
@@ -44,17 +44,11 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             // need to attach KeyEvent caller to a Node of some sort.
             // How about an invisible Box?
             keyboardNode.setFocusTraversable(true);
-//            keyboardNode.requestFocus();
-            anicatcher = new AnimationTimer(){
+            keyboardNode.requestFocus();
+            ani = new AnimationTimer(){
                 @Override
                 public void handle(long now) {
-                    keyboardNode.setOnKeyPressed(e -> keyhandler.handle(e));
-                    // UPDATE
-                }
-            };
-            aniescaper = new AnimationTimer() {
-                @Override
-                public void handle(long now) {
+                    keyboardNode.setOnKeyReleased(e -> keyhandler.releasehandle(e));
                     keyboardNode.setOnKeyPressed(e -> keyhandler.handle(e));
                     // UPDATE
                 }
@@ -97,8 +91,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         }
         else if (event.getSource() == gameStart) {
             gui.buildGameFieldScreen();
-            anicatcher.start();
-            aniescaper.start();
+            ani.start();
         }
     }
 

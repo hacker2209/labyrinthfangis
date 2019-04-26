@@ -6,25 +6,51 @@ import javafx.scene.input.KeyEvent;
 
 public class aniThreads extends Thread {
 
-    //Instancevariabels
-    private AnimationTimer ani;
-    private Controller con;
+    private String direction;
     private GameGui gui;
-    private Keyhandler handler;
+    protected boolean done = true;
 
-    public aniThreads(Controller con, GameGui gui) {
-        this.con = con;
+
+    public aniThreads(String direction, GameGui gui) {
+        this.direction = direction;
         this.gui = gui;
+
     }
 
     public void run() {
-        handler = new Keyhandler(gui ,con);
-        ani = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                con.keyboardNode.setOnKeyPressed(e -> handler.handle(e));
+        while(done) {
+            switch (direction) {
+                case "up":
+                    gui.escaper.moveUp();
+                    break;
+                case "down":
+                    gui.escaper.moveDown();
+                    break;
+                case "left":
+                    gui.escaper.moveLeft();
+                    break;
+                case "right":
+                    gui.escaper.moveRight();
+                    break;
+                case "a":
+                    gui.catcher.moveLeft();
+                    break;
+                case "s":
+                    gui.catcher.moveDown();
+                    break;
+                case "d":
+                    gui.catcher.moveRight();
+                    break;
+                case "w":
+                    gui.catcher.moveUp();
+                    break;
+                    default:
+                        break;
             }
-        };
-        ani.start();
+        }
+    }
+
+    public void terminate() {
+        done = false;
     }
 }

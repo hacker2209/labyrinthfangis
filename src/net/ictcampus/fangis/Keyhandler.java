@@ -1,53 +1,90 @@
 package net.ictcampus.fangis;
 
-import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
-
-import javax.xml.transform.sax.SAXSource;
-import java.security.Key;
 
 public class Keyhandler implements EventHandler<KeyEvent> {
     public GameGui gui;
     private Controller con;
+    private aniThreads th00, th01, th02, th03, th04, th05, th06, th07;
 
     public Keyhandler(GameGui gui, Controller con) {
         this.gui = gui;
         this.con = con;
     }
 
+    public void releasehandle(KeyEvent e) {
+        switch (e.getCode()) {
+            case UP:
+                th00.terminate();
+                break;
+            case DOWN:
+                th01.terminate();
+                break;
+            case LEFT:
+                th02.terminate();
+                break;
+            case RIGHT:
+                th03.terminate();
+                break;
+            case W:
+                th04.terminate();
+                break;
+            case A:
+                th05.terminate();
+                break;
+            case D:
+                th06.terminate();
+                break;
+            case S:
+                th07.terminate();
+                break;
+            default:
+                break;
+
+        }
+    }
     @Override
     public void handle(KeyEvent e) {
         switch (e.getCode()) {
             case UP:
-                gui.escaper.moveUp();
+                th00 = new aniThreads("up", gui);
+                th00.start();
                 break;
             case DOWN:
-                gui.escaper.moveDown();
+                th01 = new aniThreads("down", gui);
+                th01.start();
                 break;
             case LEFT:
-                gui.escaper.moveLeft();
+                th02 = new aniThreads("left", gui);
+                th02.start();
                 break;
             case RIGHT:
-                gui.escaper.moveRight();
+                th03 = new aniThreads("right", gui);
+                th03.start();
                 break;
             case W:
-                gui.catcher.moveUp();
+                th04 = new aniThreads("w", gui);
+                th04.start();
                 break;
             case A:
-                gui.catcher.moveLeft();
+                th05 = new aniThreads("a", gui);
+                th05.start();
                 break;
             case D:
-                gui.catcher.moveRight();
+                th06 = new aniThreads("d", gui);
+                th06.start();
                 break;
             case S:
-                gui.catcher.moveDown();
+                th07 = new aniThreads("s", gui);
+                th07.start();
                 break;
             case B:
-                con.anicatcher.stop();
-                con.aniescaper.stop();
+                con.ani.stop();
                 gui.buildWelcomeScreen();
                 break;
+                default:
+                    break;
             case R:
                 gui.throwBanana(gui.catcher.getTranslateX(),gui.catcher.getTranslateY());
                 break;
