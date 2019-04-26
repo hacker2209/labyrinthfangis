@@ -18,8 +18,8 @@ public class GameGui {
     //Instancevariabels for all Scenes
     protected Controller con;
     protected Stage primarystage;
-    protected Scene setNameScene, explainScene, welcomeScene, gameScene;
-    protected BorderPane welcomeScenePane;
+    protected Scene setNameScene, explainScene, welcomeScene, gameScene, gameOverScene;
+    protected BorderPane gameOverPane;
     protected GridPane setNameScenePane, explainScenePane, gameRasterPane;
     protected Pane gameFieldPane;
 
@@ -42,6 +42,10 @@ public class GameGui {
     protected Box keyboardNode;
     protected Player catcher, escaper;
 
+    //Instancevariabels for gameOver
+    private Label gameOverText, gameOverTitle;
+    private Button gameQuitButton;
+
     public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart, Box keyboardNode, Controller con) {
         this.primarystage = primarystage;
         this.playButton = playButton;
@@ -53,21 +57,21 @@ public class GameGui {
     }
 
     public void buildWelcomeScreen() {
-        welcomeScenePane = new BorderPane();
-        welcomeScene = new Scene(welcomeScenePane, 300, 160);
+        gameOverPane = new BorderPane();
+        welcomeScene = new Scene(gameOverPane, 300, 160);
         //Create Nodes for welcomeScene
         welcomeText = new Label("Welcome to our Labyrinth-Fanigs Game!\nThis is a simple Game\nmade by zauggmo and Technat314");
         gameTitle = new Label("Labyrinth-Fangis");
 
         //Put Nodes on PaneT
-        welcomeScenePane.setTop(gameTitle);
-        welcomeScenePane.setBottom(playButton);
-        welcomeScenePane.setCenter(welcomeText);
+        gameOverPane.setTop(gameTitle);
+        gameOverPane.setBottom(playButton);
+        gameOverPane.setCenter(welcomeText);
         //Add some Style to welcomeScene
         welcomeScene.getStylesheets().add(getClass().getResource("welcomeScene.css").toExternalForm());
         gameTitle.getStyleClass().add("gameTitle");
         playButton.getStyleClass().add("playButton");
-        welcomeScenePane.getStyleClass().add("pane");
+        gameOverPane.getStyleClass().add("pane");
         welcomeText.getStyleClass().add("text");
         //Show welcomeScene
         primarystage.setScene(welcomeScene);
@@ -174,6 +178,29 @@ public class GameGui {
         gameFieldPane.getChildren().add(catcher);
         //Show Scene
         primarystage.setScene(gameScene);
+        primarystage.show();
+    }
+
+    public void buildGameOverScreen() {
+        gameOverPane = new BorderPane();
+        gameOverScene = new Scene(gameOverPane, 300, 160);
+        //Create Nodes for welcomeScene
+        gameOverText = new Label("Welcome to our Labyrinth-Fanigs Game!\nThis is a simple Game\nmade by zauggmo and Technat314");
+        gameOverTitle = new Label("Labyrinth-Fangis");
+        gameQuitButton = new Button("Quit");
+
+        //Put Nodes on PaneT
+        gameOverPane.setTop(gameOverTitle);
+        gameOverPane.setBottom(gameQuitButton);
+        gameOverPane.setCenter(gameOverText);
+        //Add some Style to welcomeScene
+        gameOverScene.getStylesheets().add(getClass().getResource("gameOverScene.css").toExternalForm());
+        gameTitle.getStyleClass().add("gameTitle");
+        playButton.getStyleClass().add("playButton");
+        gameOverPane.getStyleClass().add("pane");
+        welcomeText.getStyleClass().add("text");
+        //Show welcomeScene
+        primarystage.setScene(welcomeScene);
         primarystage.show();
     }
 
