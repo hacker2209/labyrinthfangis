@@ -158,6 +158,7 @@ public class GameGui {
         lblTimer = new Label("3:00");
         //Grid Styling
         setNameScene.getStylesheets().add(getClass().getResource("gameField.css").toExternalForm());
+        gameFieldPane.getStyleClass().add("pane");
         //Put Nodes on Raster
         gameRasterPane.add(gameFieldPane,0,0);
 //        gameRasterPane.add(abrButton,0,1);
@@ -178,9 +179,17 @@ public class GameGui {
 
     public void throwBanana(double x, double y){
         Image image = new Image(getClass().getResourceAsStream("img/banana.png"));
+        ImageView banana = new ImageView(image);
+        banana.setFitHeight(50);
+        banana.setFitWidth(50);
         lblBanana = new Label();
-        lblBanana.setGraphic(new ImageView(image));
+        lblBanana.setGraphic(banana);
         gameFieldPane.getChildren().add(lblBanana);
+        lblBanana.getStyleClass().add("banana");
+        lblBanana.setMinWidth(10);
+        lblBanana.setMinHeight(10);
+        lblBanana.setMaxWidth(10);
+        lblBanana.setMaxHeight(10);
         lblBanana.setTranslateX(x);
         lblBanana.setTranslateY(y);
     }

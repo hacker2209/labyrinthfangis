@@ -51,6 +51,8 @@ public class Keyhandler implements EventHandler<KeyEvent> {
             case R:
                 gui.throwBanana(gui.catcher.getTranslateX(),gui.catcher.getTranslateY());
                 break;
+            case DIGIT1:
+                gui.throwBanana(gui.escaper.getTranslateX(),gui.escaper.getTranslateY());
 
         }
     }
