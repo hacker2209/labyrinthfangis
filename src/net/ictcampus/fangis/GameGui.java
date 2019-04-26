@@ -180,8 +180,8 @@ public class GameGui {
     public void throwBanana(double x, double y){
         Image image = new Image(getClass().getResourceAsStream("img/banana.png"));
         ImageView banana = new ImageView(image);
-        banana.setFitHeight(50);
-        banana.setFitWidth(50);
+        banana.setFitHeight(30);
+        banana.setFitWidth(30);
         lblBanana = new Label();
         lblBanana.setGraphic(banana);
         gameFieldPane.getChildren().add(lblBanana);

@@ -94,10 +94,10 @@ public class Keyhandler implements EventHandler<KeyEvent> {
                 default:
                     break;
             case R:
-                gui.throwBanana(gui.catcher.getTranslateX(),gui.catcher.getTranslateY());
+                gui.throwBanana(gui.catcher.getTranslateX()-gui.catcher.getRadiusX()*3,gui.catcher.getTranslateY());
                 break;
             case DIGIT1:
-                gui.throwBanana(gui.escaper.getTranslateX(),gui.escaper.getTranslateY());
+                gui.throwBanana(gui.escaper.getTranslateX()-gui.escaper.getRadiusX()*3,gui.escaper.getTranslateY());
 
         }
     }
