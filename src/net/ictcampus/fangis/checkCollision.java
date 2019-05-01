@@ -2,7 +2,6 @@ package net.ictcampus.fangis;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
-import javafx.scene.Group;
 
 public class checkCollision extends Thread {
 
@@ -23,10 +22,6 @@ public class checkCollision extends Thread {
                 animationTimer = new AnimationTimer() {
                     @Override
                     public void handle(long now) {
-                        int caty = (int) con.catcher.getTranslateY();
-                        int catx = (int) con.catcher.getTranslateX();
-                        int escy = (int) con.escaper.getTranslateY();
-                        int escx = (int) con.escaper.getTranslateX();
                         if (con.catcher.getBoundsInParent().intersects(con.escaper.getBoundsInParent()))  {
                             terminate();
                         }

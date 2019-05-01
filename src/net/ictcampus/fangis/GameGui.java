@@ -166,7 +166,7 @@ public class GameGui {
         gameFieldPane.setMaxWidth(1000.0);
         gameFieldPane.setMinHeight(400.0);
         //Initialize Nodes for Grid
-        lblScore = new Label("The Score");
+        lblScore = new Label("");
         lblTimer = new Label();
         //Grid Styling
         setNameScene.getStylesheets().add(getClass().getResource("css/gameField.css").toExternalForm());
