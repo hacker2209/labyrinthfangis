@@ -17,7 +17,11 @@ public class gameObejctGenerator {
         this.con = con;
     }
 
-    //Create random GameObjects
+
+    /**
+     * Generates random Objects
+     * @param anzahl number of GameObjects
+     */
     public void createObstacles(int anzahl) {
         fillDimensions();
         //Create Objects
@@ -30,6 +34,10 @@ public class gameObejctGenerator {
         }
     }
 
+    /**
+     * Generates the random X Position
+     * @return Random X Position
+     */
     public int randomXPosition() {
         boolean status = false;
         int width = (1000 - Collections.max(widths));
@@ -52,6 +60,10 @@ public class gameObejctGenerator {
         return x;
     }
 
+    /**
+     * Generates the random Y Position
+     * @return Random Y Position
+     */
     public int randomYPosition() {
         boolean status = false;
         int height = (600 - Collections.max(heights));
@@ -72,6 +84,9 @@ public class gameObejctGenerator {
         return y;
     }
 
+    /**
+     * Fills a List with width and height
+     */
     public void fillDimensions() {
         widths.add(100);
         widths.add(80);
@@ -83,6 +98,10 @@ public class gameObejctGenerator {
         heights.add(35);
     }
 
+    /**
+     * Takes a random Width and Height out of a list
+     * @return Random Width and Height
+     */
     public int[] getRandomdimensions() {
         dims = new int[2];
         dims[0] = widths.get(rand.nextInt(widths.size()));
@@ -90,6 +109,12 @@ public class gameObejctGenerator {
         return dims;
     }
 
+    /**
+     * List of Ranges with a Limit
+     * @param from Range start
+     * @param limit Range limit
+     * @return generated Range
+     */
     private List<Integer> forLoopRange(int from, int limit) {
         List<Integer> numbers = new ArrayList<>(limit);
         for (int to = from + limit; from < to; ++from) {

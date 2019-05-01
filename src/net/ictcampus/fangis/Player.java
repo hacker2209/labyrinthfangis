@@ -32,7 +32,9 @@ public class Player extends Arc {
         catched = true;
     }
 
-    //Spieler bewegen
+    /**
+     * Spieler wird beweht wenn keine Wand in der nähe ist
+     */
     public void moveLeft() {
         if (moveLeftStatus) {
             if (playerRoll.equals("catcher")) {

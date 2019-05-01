@@ -13,4 +13,6 @@ public interface ScoreDao {
     public void insertScore(String username, Time time, int rolleID);
 
     public List<String> maxScore();
+
+    public List<String> allUsername();
 }

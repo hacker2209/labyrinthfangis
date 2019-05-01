@@ -67,7 +67,6 @@ public class ScoreJDBCDao implements ScoreDao {
         }
 
     }
-
     @Override
     public List<String> maxScore() {
         List<String> all = new ArrayList<>();
@@ -82,6 +81,30 @@ public class ScoreJDBCDao implements ScoreDao {
                 String time = rs.getTime("zeit").toString();
                 String score= "Name: "+rs.getString("username")+"\tRoll: "+rs.getString("rolleName")+"\tTime: "+time;
                 all.add(score);
+            }
+
+
+
+            closeConnection();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return all;
+    }
+
+    @Override
+    public List<String> allUsername() {
+        List<String> all = new ArrayList<>();
+
+        String sql = "Select  username from Score";
+        try {
+            con = openConnection();
+
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                all.add(rs.getString("username"));
             }
 
 

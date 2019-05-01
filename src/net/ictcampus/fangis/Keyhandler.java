@@ -44,6 +44,11 @@ public class Keyhandler implements EventHandler<KeyEvent> {
 
         }
     }
+
+    /**
+     * Listener for Key presses to steer the Players
+     * @param e Event listener
+     */
     @Override
     public void handle(KeyEvent e) {
         switch (e.getCode()) {

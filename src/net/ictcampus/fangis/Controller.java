@@ -32,7 +32,11 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         launch(args);
     }
 
-    //Real Main logic, looks for Buttonactions, has AnimatorTimer for Game...
+    /**
+     * Real Main logic, looks for Buttonactions, has AnimatorTimer for Game...
+     * @param primaryStage Stage to set the Scenes
+     * @throws Exception Is needen but not throwed
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         playButton = new Button("Play");

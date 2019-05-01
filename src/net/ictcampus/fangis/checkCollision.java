@@ -26,10 +26,15 @@ public class checkCollision extends Thread {
                 animationTimer = new AnimationTimer() {
                     @Override
                     public void handle(long now) {
+                        /**
+                         * Check Player Coliision
+                         */
                         if (con.catcher.getBoundsInParent().intersects(con.escaper.getBoundsInParent()))  {
                             terminate();
                         }
-                        //Check if Player is near the Wall and look that he cannont break out of the wall
+                        /**
+                         * Check if Player is near the Wall and look that he cannont break out of the wall
+                         */
                         if (con.escaper.getTranslateX() <= 15) {
                             con.escaper.moveLeftStatus = false;
                             System.out.println("Escaper hat gerade Linke Wand verlassen wollen");

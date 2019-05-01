@@ -29,7 +29,10 @@ public class GameTimer {
 //        }
 //    };
 
-
+    /**
+     * Start the counter for the timelimit
+     * @param gui Gui to set the Labeltext
+     */
     public void countStart(GameGui gui) {
         this.gui=gui;
 
@@ -52,6 +55,9 @@ public class GameTimer {
         }, 0,1000);
     }
 
+    /**
+     * Write the Timer into a Label
+     */
     public void showTimer() {
         int minute = (int) (timeLeftMilliseconds / 1000) / 60;
         int second = (int) (timeLeftMilliseconds / 1000) % 60;

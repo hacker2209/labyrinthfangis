@@ -8,7 +8,14 @@ import javafx.scene.shape.*;
 
 public class GameObject extends Rectangle{
 
-
+    /**
+     * Constructor for the Game Objects
+     * @param x X Position
+     * @param y Y Position
+     * @param w Width
+     * @param h Height
+     * @param color Color
+     */
     public GameObject(int x, int y,int w, int h, Color color) {
         super(w,h,color);
         setX(x);
