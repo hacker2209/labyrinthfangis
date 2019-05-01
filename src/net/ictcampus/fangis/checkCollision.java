@@ -109,31 +109,55 @@ public class checkCollision extends Thread {
     private void checkGameObjectCollision() {
         for (GameObject obj : con.gobi.obstacles) {
             //Eckpunkte für x und y Koordinaten holen
-            int obenlinksx = (int)obj.getX();
-            int obenrechtsx = (int)obj.getY() + (int)obj.getWidth();
-            int obenlinksy = (int)obj.getY();
-            int untenlinksy = (int)obj.getY() + (int)obj.getHeight();
+            int obenlinksx = (int)obj.getX() - 10;
+            int obenrechtsx = (int)obj.getX() + (int)obj.getWidth() + 10;
+            int obenlinksy = (int)obj.getY() - 10;
+            int untenlinksy = (int)obj.getY() + (int)obj.getHeight() + 10;
+            int obenrechtsy = (int)obj.getY();
+            int untenlinksx = (int)obj.getX();
+            int untenrechtsx = (int)obj.getX() + (int)obj.getWidth();
+            int untenrechtsy = (int)obj.getY() +(int)obj.getHeight();
+
+            //Koordinaten des Spielers vernünftig abspeichern
+            int xesc = (int)con.escaper.getTranslateX();
+            int yesc = (int)con.escaper.getTranslateY();
+            int xcat = (int)con.catcher.getTranslateX();
+            int ycat = (int)con.catcher.getTranslateY();
 
             //Listen mit x und y Werten des Objekts machen
             List<Integer> xwerte = makeRange(obenlinksx, obenrechtsx);
             List<Integer> ywerte = makeRange(obenlinksy, untenlinksy);
 
-            System.out.println(con.catcher.getTranslateX());
-            System.out.println(con.catcher.getTranslateY());
-            System.out.println(con.escaper.getTranslateX());
-            System.out.println(con.escaper.getTranslateY());
-
-            if (xwerte.contains((int)con.catcher.getTranslateX()) && ywerte.contains((int)con.catcher.getTranslateY())) {
+            if ((xwerte.contains(xesc)) && ywerte.contains(yesc)) {
                 System.out.println("Oh jetzt hat der Catcher ein Object berührt");
+                if (xesc <= obenlinksx + 15 && ywerte.contains(yesc)) {
+                    con.catcher.moveDownStatus = false;
+                }
+                else if (xesc >= untenlinksx - 15 && ywerte.contains(yesc)) {
+                    con.catcher.moveUpStatus = false;
+                }
+                else if(yesc <= obenlinksy + 15 && xwerte.contains(xesc)) {
+                    con.catcher.moveRightStatus = false;
+                }
+                else if (yesc >= untenrechtsy - 15 && xwerte.contains(xesc)) {
+                    con.catcher.moveLeftStatus = false;
+                }
             }
-            if (xwerte.contains((int)con.escaper.getTranslateX()) && ywerte.contains((int)con.escaper.getTranslateY())) {
+            if ((xwerte.contains(xcat)) && ywerte.contains(ycat)) {
                 System.out.println("Oh jetzt hat der Escaper ein Object berührt");
+                if (xcat <= obenlinksx + 15 && ywerte.contains(ycat)) {
+                    con.escaper.moveDownStatus = false;
+                }
+                else if (xcat >= untenlinksx - 15 && ywerte.contains(ycat)) {
+                    con.escaper.moveUpStatus = false;
+                }
+                else if(ycat <= obenlinksy + 15 && xwerte.contains(xcat)) {
+                    con.escaper.moveRightStatus = false;
+                }
+                else if (ycat >= untenrechtsy - 15 && xwerte.contains(xcat)) {
+                    con.escaper.moveLeftStatus = false;
+                }
             }
-
-            double obenrechtsy = obj.getTranslateY();
-            double untenlinksx = obj.getTranslateX();
-            double untenrechtsx = obj.getTranslateX() + obj.getWidth();
-            double untenrechtsy = obj.getTranslateY() + obj.getHeight();
 
         }
     }

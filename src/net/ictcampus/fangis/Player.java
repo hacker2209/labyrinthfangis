@@ -56,7 +56,9 @@ public class Player extends Arc {
     public void moveUp() {
         if (moveUpStatus) {
             if (playerRoll.equals("catcher")) {
-                setTranslateY(getTranslateY() - 14);
+                if (checkFeldIsFree(getTranslateX(), getTranslateY())){
+                    setTranslateY(getTranslateY() - 14);
+                }
             } else {
                 setTranslateY(getTranslateY() - 15);
             }
@@ -72,6 +74,10 @@ public class Player extends Arc {
         }
     }
 
+    public boolean checkFeldIsFree(){
+
+        return true;
+    }
 
 
     //------------------------------ Getter & Setter --------------------------------------------
