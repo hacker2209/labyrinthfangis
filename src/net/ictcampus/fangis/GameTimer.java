@@ -1,7 +1,9 @@
 package net.ictcampus.fangis;
 
 import javafx.application.Platform;
+import net.ictcampus.db.ScoreJDBCDao;
 
+import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -9,6 +11,7 @@ public class GameTimer {
     private long timeLeftMilliseconds = 180000;  // 3min
     GameGui gui;
     Timer timer = new Timer();
+    ScoreJDBCDao db = new ScoreJDBCDao();
 //    TimerTask task = new TimerTask() {
 //        @Override
 //        public void countStart() {
@@ -57,7 +60,7 @@ public class GameTimer {
         //System.out.println(timeLeftMilliseconds);
     }
     public  void stopTimer(){
-        timer.purge();
+        timer.cancel();
     }
 
 }

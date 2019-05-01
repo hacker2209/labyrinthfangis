@@ -2,6 +2,9 @@ package net.ictcampus.fangis;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import net.ictcampus.db.ScoreJDBCDao;
+
+import java.sql.Time;
 
 public class checkCollision extends Thread {
 
@@ -9,6 +12,7 @@ public class checkCollision extends Thread {
     private GameGui gui;
     private boolean done = false;
     private AnimationTimer animationTimer;
+    private ScoreJDBCDao db;
 
     public checkCollision(Controller con, GameGui gui) {
         this.con = con;
@@ -96,7 +100,12 @@ public class checkCollision extends Thread {
 
 
     private void terminate() {
+        db = new ScoreJDBCDao();
         gui.gameTimer.stopTimer();
+        Time score= Time.valueOf("24:"+gui.lblTimer.getText());
+        //System.out.println("Zeit: "+score);
+        db.insertScore(con.catcher.getPlayerName(),score,1);
+        //System.out.println("Name: "+con.catcher.getPlayerName());
         con.escaper.catched();
         con.ani.stop();
         animationTimer.stop();

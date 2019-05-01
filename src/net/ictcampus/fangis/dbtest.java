@@ -11,7 +11,7 @@ public class dbtest {
 
     public static void main(String[] args){
         ScoreJDBCDao db= new ScoreJDBCDao();
-        //db.insertScore("a", Time.valueOf("01:01:20"),2);
+        db.insertScore("abcdefg", Time.valueOf("01:01:20"),2);
         List<String> max = db.maxScore();
         for (String i : max){
             System.out.println(i);

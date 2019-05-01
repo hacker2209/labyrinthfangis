@@ -180,8 +180,8 @@ public class GameGui {
         //-------------Put nodes on Field
         gameFieldPane.getChildren().add(keyboardNode);
         //Make Players
-        catcher = new Player(20,20, lblPlayer1.getText(),"catcher", Color.RED, 5, 5, 15,15,45,270);
-        escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 20, lblPlayer2.getText(), "escaper", Color.BLUE, 5,5,15,15,45,270);
+        catcher = new Player(20,20, txtPlayer1.getText(),"catcher", Color.RED, 5, 5, 15,15,45,270);
+        escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 20, txtPlayer2.getText(), "escaper", Color.BLUE, 5,5,15,15,45,270);
         con.setPlayers(catcher, escaper);
         gameFieldPane.getChildren().add(escaper);
         gameFieldPane.getChildren().add(catcher);
@@ -197,7 +197,7 @@ public class GameGui {
         gameOverPane = new GridPane();
         scoreDataPane = new GridPane();
         scorePane = new ScrollPane();
-        gameOverScene = new Scene(gameOverPane, 300, 220);
+        gameOverScene = new Scene(gameOverPane, 320, 250);
         //Create Nodes for welcomeScene
         gameOverText = new Label("Tatata, the Game is over, \nthe Catcher won!");
         gameOverTitle = new Label("GameOver");
@@ -205,7 +205,19 @@ public class GameGui {
         //db.insertScore("a", Time.valueOf("01:01:20"),2);
         List<String> max = db.maxScore();
         for (String i : max) {
-            lblScore = new Label(i);
+            lblScore = new Label();
+            switch (row){
+                case 0:
+                    lblScore.setTextFill(Color.web("#ffd700"));
+                    break;
+                case 1:
+                    lblScore.setTextFill(Color.web("#C0C0C0"));
+                    break;
+                case 2:
+                    lblScore.setTextFill(Color.web("#CD7F32"));
+                    break;
+            }
+            lblScore.setText(row+1+". Place: "+i);
             scoreDataPane.add(lblScore,0,row);
             row++;
         }
