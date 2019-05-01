@@ -12,6 +12,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 import javafx.stage.Stage;
+import net.ictcampus.db.ScoreJDBCDao;
+
+import java.util.List;
 
 public class GameGui {
 
@@ -76,6 +79,9 @@ public class GameGui {
         gameOverPane.getStyleClass().add("pane");
         welcomeText.getStyleClass().add("text");
         //Show welcomeScene
+        primarystage.setTitle("Labyrinthfangis");
+        Image icon = new Image(getClass().getResourceAsStream("img/maze.png"));
+        primarystage.getIcons().add(icon);
         primarystage.setScene(welcomeScene);
         primarystage.show();
     }
@@ -191,11 +197,18 @@ public class GameGui {
         //Create Nodes for welcomeScene
         gameOverText = new Label("Tatata, the Game is over, \nthe Catcher won!");
         gameOverTitle = new Label("GameOver");
+        ScoreJDBCDao db= new ScoreJDBCDao();
+        //db.insertScore("a", Time.valueOf("01:01:20"),2);
+        List<String> max = db.maxScore();
+        for (String i : max){
+            lblScore = new Label(i);
+        }
 
         //Put Nodes on PaneT
         gameOverPane.setTop(gameOverTitle);
         gameOverPane.setBottom(gameQuitButton);
         gameOverPane.setCenter(gameOverText);
+        gameOverPane.setRight(lblScore);
         //Add some Style to welcomeScene
         gameOverScene.getStylesheets().add(getClass().getResource("css/gameOverScene.css").toExternalForm());
         gameOverTitle.getStyleClass().add("gameOverTitle");
