@@ -2,15 +2,13 @@ package net.ictcampus.fangis;
 
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class gameObejctGenerator {
 
     private List<Integer> widths = new ArrayList();
+    private List<Integer> heights = new ArrayList();
     protected List<GameObject> obstacles = new ArrayList();
-    private int height;
     private Random rand = new Random();
     private int[] dims;
     private GameGui gui;
@@ -20,7 +18,7 @@ public class gameObejctGenerator {
     }
 
     //Create random GameObjects
-    public void createObstacle(int anzahl) {
+    public void createObstacles(int anzahl) {
         fillDimensions();
         //Create Objects
         for (int i = 0; i < anzahl; i++){
@@ -33,12 +31,12 @@ public class gameObejctGenerator {
     }
 
     public int  randomXPosition(){
-        int width = 1000;
+        int width = (1000 - Collections.max(widths));
         int x = rand.nextInt(width);
         return x;
     }
     public int randomYPosition(){
-        int height = 600;
+        int height = (600 - Collections.max(heights));
         int y = rand.nextInt(height);
         return y;
     }
@@ -48,13 +46,16 @@ public class gameObejctGenerator {
         widths.add(80);
         widths.add(50);
         widths.add(20);
-        height = 30;
+        heights.add(20);
+        heights.add(40);
+        heights.add(80);
+        heights.add(35);
     }
 
     public int[] getRandomdimensions() {
         dims = new int[2];
         dims[0] = widths.get(rand.nextInt(widths.size()));
-        dims[1] = height;
+        dims[1] = heights.get(rand.nextInt(widths.size()));
         return dims;
     }
 }
