@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameTimer {
+
     private long timeLeftMilliseconds = 180000;  // 3min
     GameGui gui;
     Timer timer = new Timer();
@@ -31,10 +32,11 @@ public class GameTimer {
 
     /**
      * Start the counter for the timelimit
+     *
      * @param gui Gui to set the Labeltext
      */
     public void countStart(GameGui gui) {
-        this.gui=gui;
+        this.gui = gui;
 
         timer.schedule(new TimerTask() {
             @Override
@@ -52,7 +54,7 @@ public class GameTimer {
                 });
 
             }
-        }, 0,1000);
+        }, 0, 1000);
     }
 
     /**
@@ -65,8 +67,17 @@ public class GameTimer {
         System.out.println(minute + ":" + second);
         //System.out.println(timeLeftMilliseconds);
     }
-    public  void stopTimer(){
+
+    public void stopTimer() {
         timer.cancel();
+    }
+
+    public String getScoreTime() {
+        long difTime = 180000-timeLeftMilliseconds;
+        int min = (int) (difTime / 1000) / 60;
+        int sec = (int) (difTime / 1000) % 60;
+        String scoreTime= new String(min+":"+sec);
+        return scoreTime;
     }
 
 }

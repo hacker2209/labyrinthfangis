@@ -32,7 +32,7 @@ public class checkCollision extends Thread {
                         /**
                          * Check Player Coliision
                          */
-                        if (con.catcher.getBoundsInParent().intersects(con.escaper.getBoundsInParent()))  {
+                        if (con.catcher.getBoundsInParent().intersects(con.escaper.getBoundsInParent())) {
                             terminate();
                         }
                         /**
@@ -41,29 +41,25 @@ public class checkCollision extends Thread {
                         if (con.escaper.getTranslateX() <= 15) {
                             con.escaper.moveLeftStatus = false;
                             System.out.println("Escaper hat gerade Linke Wand verlassen wollen");
-                        }
-                        else if(con.escaper.getTranslateX() >= 5){
+                        } else if (con.escaper.getTranslateX() >= 5) {
                             con.escaper.moveLeftStatus = true;
                         }
-                        if (con.escaper.getTranslateX() >= (int)gui.gameFieldPane.getMaxWidth() - 20) {
+                        if (con.escaper.getTranslateX() >= (int) gui.gameFieldPane.getMaxWidth() - 20) {
                             con.escaper.moveRightStatus = false;
                             System.out.println("Escaper hat gerade Rechte Wand verlassen wollen");
-                        }
-                        else if(con.escaper.getTranslateX() <= (int)gui.gameFieldPane.getMaxWidth() - 10){
+                        } else if (con.escaper.getTranslateX() <= (int) gui.gameFieldPane.getMaxWidth() - 10) {
                             con.escaper.moveRightStatus = true;
                         }
-                        if (con.escaper.getTranslateY() >= (int)gui.gameFieldPane.getMinHeight() - 20) {
+                        if (con.escaper.getTranslateY() >= (int) gui.gameFieldPane.getMinHeight() - 20) {
                             con.escaper.moveDownStatus = false;
                             System.out.println("Escaper hat gerade untere Wand verlassen wollen");
-                        }
-                        else if(con.escaper.getTranslateY() <= (int)gui.gameFieldPane.getMinHeight() - 10){
+                        } else if (con.escaper.getTranslateY() <= (int) gui.gameFieldPane.getMinHeight() - 10) {
                             con.escaper.moveDownStatus = true;
                         }
                         if (con.escaper.getTranslateY() <= 15) {
                             con.escaper.moveUpStatus = false;
                             System.out.println("Escaper hat gerade Obere Wand verlassen wollen");
-                        }
-                        else if(con.escaper.getTranslateY() >= 5){
+                        } else if (con.escaper.getTranslateY() >= 5) {
                             con.escaper.moveUpStatus = true;
                         }
 
@@ -71,32 +67,29 @@ public class checkCollision extends Thread {
                         if (con.catcher.getTranslateX() <= 15) {
                             con.catcher.moveLeftStatus = false;
                             System.out.println("Catcher hat gerade Linke Wand verlassen wollen");
-                        }
-                        else if(con.catcher.getTranslateX() >= 5){
+                        } else if (con.catcher.getTranslateX() >= 5) {
                             con.catcher.moveLeftStatus = true;
                         }
-                        if (con.catcher.getTranslateX() >= (int)gui.gameFieldPane.getMaxWidth() - 15) {
+                        if (con.catcher.getTranslateX() >= (int) gui.gameFieldPane.getMaxWidth() - 15) {
                             con.catcher.moveRightStatus = false;
                             System.out.println("Catcher hat gerade Rechte Wand verlassen wollen");
-                        }
-                        else if(con.catcher.getTranslateX() <= (int)gui.gameFieldPane.getMaxWidth() - 10){
+                        } else if (con.catcher.getTranslateX() <= (int) gui.gameFieldPane.getMaxWidth() - 10) {
                             con.catcher.moveRightStatus = true;
                         }
-                        if (con.catcher.getTranslateY() >= (int)gui.gameFieldPane.getMinHeight() - 20) {
+                        if (con.catcher.getTranslateY() >= (int) gui.gameFieldPane.getMinHeight() - 20) {
                             con.catcher.moveDownStatus = false;
                             System.out.println("Catcher hat gerade untere Wand verlassen wollen");
-                        }
-                        else if(con.catcher.getTranslateY() <= (int)gui.gameFieldPane.getMinHeight() - 10){
+                        } else if (con.catcher.getTranslateY() <= (int) gui.gameFieldPane.getMinHeight() - 10) {
                             con.catcher.moveDownStatus = true;
                         }
                         if (con.catcher.getTranslateY() <= 15) {
                             con.catcher.moveUpStatus = false;
                             System.out.println("Catcher hat gerade Obere Wand verlassen wollen");
-                        }
-                        else if(con.catcher.getTranslateY() >= 5){
+                        } else if (con.catcher.getTranslateY() >= 5) {
                             con.catcher.moveUpStatus = true;
                         }
                         checkGameObjectCollision();
+
                     }
                 };
                 animationTimer.start();
@@ -194,12 +187,13 @@ public class checkCollision extends Thread {
         return range;
     }
 
+
     private void terminate() {
         db = new ScoreJDBCDao();
         gui.gameTimer.stopTimer();
-        Time score= Time.valueOf("24:"+gui.lblTimer.getText());
+        Time score = Time.valueOf("24:" + gui.gameTimer.getScoreTime());
         //System.out.println("Zeit: "+score);
-        db.insertScore(con.catcher.getPlayerName(),score,1);
+        db.insertScore(con.catcher.getPlayerName(), score, 1);
         //System.out.println("Name: "+con.catcher.getPlayerName());
         con.escaper.catched();
         con.ani.stop();

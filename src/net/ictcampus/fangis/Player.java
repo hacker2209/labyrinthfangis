@@ -78,6 +78,7 @@ public class Player extends Arc {
         }
     }
 
+    public boolean checkFeldIsFree(){
 
 
 
@@ -94,6 +95,10 @@ public class Player extends Arc {
     public void setPlayerRoll(String playerRoll) {
         this.playerRoll = playerRoll;
     }
+
+
+
+
 
 
 }
