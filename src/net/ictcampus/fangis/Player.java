@@ -74,7 +74,7 @@ public class Player extends Arc {
         }
     }
 
-    public boolean checkFeldIsFree(){
+    public boolean checkFeldIsFree(double x, double y){
 
         return true;
     }
