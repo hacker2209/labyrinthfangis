@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends Arc {
+
+
     final String playerName;
     private String playerRoll;
     protected boolean catched = false;
@@ -78,22 +80,10 @@ public class Player extends Arc {
         }
     }
 
-    public boolean checkFeldIsFree(){
-
-
-
     //------------------------------ Getter & Setter --------------------------------------------
 
     public String getPlayerName() {
         return playerName;
-    }
-
-    public String getPlayerRoll() {
-        return playerRoll;
-    }
-
-    public void setPlayerRoll(String playerRoll) {
-        this.playerRoll = playerRoll;
     }
 
 
