@@ -49,7 +49,7 @@ public class checkCollision extends Thread {
 
 
     private void terminate() {
-        con.gameTimer.stopTimer();
+        gui.gameTimer.stopTimer();
         con.escaper.catched();
         con.ani.stop();
         animationTimer.stop();

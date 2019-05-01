@@ -80,10 +80,12 @@ public class ScoreJDBCDao implements ScoreDao {
             rs = ps.executeQuery();
             while (rs.next()) {
                 String time = rs.getTime("zeit").toString();
-                all.add(rs.getString("username"));
-                all.add(rs.getString("rolleName"));
-                all.add(time);
+                String score= "Username: "+rs.getString("username")+"\tRolle: "+rs.getString("rolleName")+"\tZeit: "+time;
+                all.add(score);
             }
+
+
+
             closeConnection();
         } catch (SQLException e) {
             // TODO Auto-generated catch block

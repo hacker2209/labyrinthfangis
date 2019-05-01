@@ -3,6 +3,7 @@ package net.ictcampus.fangis;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,9 +23,10 @@ public class GameGui {
     protected Controller con;
     protected Stage primarystage;
     protected Scene setNameScene, explainScene, welcomeScene, gameScene, gameOverScene;
-    protected BorderPane gameOverPane, welcomePane;
-    protected GridPane setNameScenePane, explainScenePane, gameRasterPane;
+    protected BorderPane welcomePane;
+    protected GridPane setNameScenePane, explainScenePane, gameRasterPane, gameOverPane, scoreDataPane;
     protected Pane gameFieldPane;
+    protected ScrollPane scorePane;
 
     //Instancevariabels for explainScene
     protected Label explainTitle, catcherExplanation, escaperExplanation, catchername, escapername;
@@ -87,26 +89,25 @@ public class GameGui {
     }
 
 
-
     //    public void buildWelcomeScene() {
 //    }
     public void buildExplainScreen() {
         explainScenePane = new GridPane();
         explainScene = new Scene(explainScenePane, 400, 300);
         //Initialize Nodes for Grid
-        catchername  = new Label(txtPlayer1.getText());
+        catchername = new Label(txtPlayer1.getText());
         escapername = new Label(txtPlayer2.getText());
         explainTitle = new Label("How it Works...");
         catcherExplanation = new Label("- Your aim is\n to catch\nthe other by touching him\n- Controll with WASD \n- Throw Bananas with r");
-        escaperExplanation =  new Label("- Your aim is\n to escape  \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
-        GridPane.setColumnSpan(explainTitle,2);
+        escaperExplanation = new Label("- Your aim is\n to escape  \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
+        GridPane.setColumnSpan(explainTitle, 2);
         //Put Nodes on Grid
-        explainScenePane.add(explainTitle, 0,0);
+        explainScenePane.add(explainTitle, 0, 0);
         explainScenePane.add(catchername, 0, 1);
         explainScenePane.add(escapername, 1, 1);
         explainScenePane.add(catcherExplanation, 0, 2);
-        explainScenePane.add(escaperExplanation, 1,2);
-        explainScenePane.add(gameStart, 0,3);
+        explainScenePane.add(escaperExplanation, 1, 2);
+        explainScenePane.add(gameStart, 0, 3);
         GridPane.setColumnSpan(gameStart, 2);
         //Some styling for Grid
         explainScenePane.getStylesheets().add(getClass().getResource("css/explainScene.css").toExternalForm());
@@ -146,9 +147,9 @@ public class GameGui {
         setNameScenePane.setVgap(10);
         setNameScenePane.setHgap(30);
         //Put Nodes into Grid
-        setNameScenePane.add(lblName, 0,0);
+        setNameScenePane.add(lblName, 0, 0);
         setNameScenePane.setColumnSpan(lblName, 2);
-        setNameScenePane.add(nextButton,0,3);
+        setNameScenePane.add(nextButton, 0, 3);
         setNameScenePane.setColumnSpan(nextButton, 2);
         setNameScenePane.add(lblPlayer1, 0, 1);
         setNameScenePane.add(txtPlayer1, 1, 1);
@@ -162,7 +163,7 @@ public class GameGui {
     public void buildGameFieldScreen() {
         gameRasterPane = new GridPane();
         gameFieldPane = new Pane();
-        gameScene = new Scene(gameRasterPane, 1000,600);
+        gameScene = new Scene(gameRasterPane, 1000, 600);
         gameFieldPane.setMaxWidth(1000.0);
         gameFieldPane.setMinHeight(400.0);
         //Initialize Nodes for Grid
@@ -172,56 +173,63 @@ public class GameGui {
         setNameScene.getStylesheets().add(getClass().getResource("css/gameField.css").toExternalForm());
         gameFieldPane.getStyleClass().add("pane");
         //Put Nodes on Raster
-        gameRasterPane.add(gameFieldPane,0,0);
+        gameRasterPane.add(gameFieldPane, 0, 0);
 //        gameRasterPane.add(abrButton,0,1);
-        gameRasterPane.add(lblScore,1,1);
-        gameRasterPane.add(lblTimer, 2,1);
+        gameRasterPane.add(lblScore, 1, 1);
+        gameRasterPane.add(lblTimer, 2, 1);
         //-------------Put nodes on Field
         gameFieldPane.getChildren().add(keyboardNode);
         //Make Players
-        catcher = new Player(10,10, lblPlayer1.getText(),"catcher", Color.RED, 5, 5, 15,15,45,270);
-        escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 10, lblPlayer2.getText(), "escaper", Color.BLUE, 5,5,15,15,45,270);
+        catcher = new Player(10, 10, lblPlayer1.getText(), "catcher", Color.RED, 5, 5, 15, 15, 45, 270);
+        escaper = new Player(((int) gameFieldPane.getMaxWidth() - 50), 10, lblPlayer2.getText(), "escaper", Color.BLUE, 5, 5, 15, 15, 45, 270);
         con.setPlayers(catcher, escaper);
         gameFieldPane.getChildren().add(escaper);
         gameFieldPane.getChildren().add(catcher);
         //Show Scene
         primarystage.setScene(gameScene);
-        gameTimer=new GameTimer();
+        gameTimer = new GameTimer();
         gameTimer.countStart(this);
         primarystage.show();
     }
 
     public void buildGameOverScreen() {
-        gameOverPane = new BorderPane();
-        gameOverScene = new Scene(gameOverPane, 300, 160);
+        int row= 0;
+        gameOverPane = new GridPane();
+        scoreDataPane = new GridPane();
+        scorePane = new ScrollPane();
+        gameOverScene = new Scene(gameOverPane, 300, 220);
         //Create Nodes for welcomeScene
         gameOverText = new Label("Tatata, the Game is over, \nthe Catcher won!");
         gameOverTitle = new Label("GameOver");
-        ScoreJDBCDao db= new ScoreJDBCDao();
+        ScoreJDBCDao db = new ScoreJDBCDao();
         //db.insertScore("a", Time.valueOf("01:01:20"),2);
         List<String> max = db.maxScore();
-        for (String i : max){
-            //lblScore = new Label("Score: "+i);
-            System.out.println(i);
+        for (String i : max) {
+            lblScore = new Label(i);
+            scoreDataPane.add(lblScore,0,row);
+            row++;
         }
-
+        scorePane.setContent(scoreDataPane);
         //Put Nodes on PaneT
-        gameOverPane.setTop(gameOverTitle);
-        gameOverPane.setBottom(gameQuitButton);
-        gameOverPane.setCenter(gameOverText);
-        gameOverPane.setRight(lblScore);
+        gameOverPane.add(gameOverTitle,0,0);
+        //gameOverPane.setBottom(gameQuitButton);
+       gameOverPane.add(gameOverText, 0,1);
+       gameOverPane.add(scorePane,0,2);
+       gameOverPane.add(gameQuitButton,0,3);
         //Add some Style to welcomeScene
         gameOverScene.getStylesheets().add(getClass().getResource("css/gameOverScene.css").toExternalForm());
         gameOverTitle.getStyleClass().add("gameOverTitle");
         gameQuitButton.getStyleClass().add("gameQuitButton");
         gameOverPane.getStyleClass().add("pane");
         gameOverText.getStyleClass().add("gameOvertext");
+        gameOverPane.setVgap(10);
+        scorePane.setMinHeight(100);
         //Show welcomeScene
         primarystage.setScene(gameOverScene);
         primarystage.show();
     }
 
-    public void throwBanana(double x, double y){
+    public void throwBanana(double x, double y) {
         Image image = new Image(getClass().getResourceAsStream("img/banana.png"));
         ImageView banana = new ImageView(image);
         banana.setFitHeight(30);
