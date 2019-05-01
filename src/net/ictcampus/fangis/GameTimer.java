@@ -8,6 +8,7 @@ import java.util.TimerTask;
 public class GameTimer {
     private long timeLeftMilliseconds = 180000;  // 3min
     GameGui gui;
+    Timer timer = new Timer();
 //    TimerTask task = new TimerTask() {
 //        @Override
 //        public void countStart() {
@@ -28,7 +29,7 @@ public class GameTimer {
 
     public void countStart(GameGui gui) {
         this.gui=gui;
-        Timer timer = new Timer();
+
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -54,6 +55,9 @@ public class GameTimer {
         gui.lblTimer.setText(minute + ":" + second);
         System.out.println(minute + ":" + second);
         //System.out.println(timeLeftMilliseconds);
+    }
+    public  void stopTimer(){
+        timer.purge();
     }
 
 }

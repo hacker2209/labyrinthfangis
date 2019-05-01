@@ -201,7 +201,8 @@ public class GameGui {
         //db.insertScore("a", Time.valueOf("01:01:20"),2);
         List<String> max = db.maxScore();
         for (String i : max){
-            lblScore = new Label(i);
+            //lblScore = new Label("Score: "+i);
+            System.out.println(i);
         }
 
         //Put Nodes on PaneT
