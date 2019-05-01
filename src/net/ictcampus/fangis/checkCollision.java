@@ -6,6 +6,9 @@ import net.ictcampus.db.ScoreJDBCDao;
 
 import java.sql.Time;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class checkCollision extends Thread {
 
     private Controller con;
@@ -88,6 +91,7 @@ public class checkCollision extends Thread {
                         else if(con.catcher.getTranslateY() >= 5){
                             con.catcher.moveUpStatus = true;
                         }
+                        checkGameObjectCollision();
 
                     }
                 };
@@ -97,6 +101,45 @@ public class checkCollision extends Thread {
         });
     }
 
+    private void checkGameObjectCollision() {
+        for (GameObject obj : con.gobi.obstacles) {
+            //Eckpunkte für x und y Koordinaten holen
+            int obenlinksx = (int)obj.getX();
+            int obenrechtsx = (int)obj.getY() + (int)obj.getWidth();
+            int obenlinksy = (int)obj.getY();
+            int untenlinksy = (int)obj.getY() + (int)obj.getHeight();
+
+            //Listen mit x und y Werten des Objekts machen
+            List<Integer> xwerte = makeRange(obenlinksx, obenrechtsx);
+            List<Integer> ywerte = makeRange(obenlinksy, untenlinksy);
+
+            System.out.println(con.catcher.getTranslateX());
+            System.out.println(con.catcher.getTranslateY());
+            System.out.println(con.escaper.getTranslateX());
+            System.out.println(con.escaper.getTranslateY());
+
+            if (xwerte.contains((int)con.catcher.getTranslateX()) && ywerte.contains((int)con.catcher.getTranslateY())) {
+                System.out.println("Oh jetzt hat der Catcher ein Object berührt");
+            }
+            if (xwerte.contains((int)con.escaper.getTranslateX()) && ywerte.contains((int)con.escaper.getTranslateY())) {
+                System.out.println("Oh jetzt hat der Escaper ein Object berührt");
+            }
+
+            double obenrechtsy = obj.getTranslateY();
+            double untenlinksx = obj.getTranslateX();
+            double untenrechtsx = obj.getTranslateX() + obj.getWidth();
+            double untenrechtsy = obj.getTranslateY() + obj.getHeight();
+
+        }
+    }
+
+    private List<Integer> makeRange(int min, int max) {
+        List<Integer> range = new ArrayList<>();
+        for (int i = min; i <= max; i++ ) {
+            range.add(i);
+        }
+        return range;
+    }
 
 
     private void terminate() {
