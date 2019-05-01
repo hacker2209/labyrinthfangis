@@ -47,10 +47,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             nextButton.setOnAction(this);
             gameStart.setOnAction(this);
             gameQuitButton.setOnAction(this);
-            gobi = new gameObejctGenerator(gui);
             keyhandler = new Keyhandler(gui, this);
-            coli = new checkCollision(this, gui);
-            gobi.createObstacles(10);
             // need to attach KeyEvent caller to a Node of some sort.
             keyboardNode.setFocusTraversable(true);
             keyboardNode.requestFocus();
@@ -102,8 +99,11 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         } else if (event.getSource() == gameStart) {
             gui.buildGameFieldScreen();
             ani.start();
-            coli.start();
+            gobi = new gameObejctGenerator(this);
+            gobi.createObstacles(30);
             gui.gameFieldPane.getChildren().addAll(gobi.obstacles);
+            coli = new checkCollision(this, gui);
+            coli.start();
         }
         else if (event.getSource() == gameQuitButton) {
             gui.primarystage.close();
