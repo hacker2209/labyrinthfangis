@@ -25,7 +25,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
     protected AnimationTimer ani;
     protected GameTimer gameTimer;
     private checkCollision coli;
-    private Keyhandler keyhandler;
+    protected Keyhandler keyhandler;
     protected gameObejctGenerator gobi;
 
     public static void main(String[] args) {

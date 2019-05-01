@@ -90,13 +90,13 @@ public class GameGui {
 //    }
     public void buildExplainScreen() {
         explainScenePane = new GridPane();
-        explainScene = new Scene(explainScenePane, 400, 300);
+        explainScene = new Scene(explainScenePane, 500, 300);
         //Initialize Nodes for Grid
         catchername = new Label(txtPlayer1.getText());
         escapername = new Label(txtPlayer2.getText());
         explainTitle = new Label("How it Works...");
-        catcherExplanation = new Label("- Your aim is\n to catch\nthe other by touching him\n- Controll with WASD \n- Throw Bananas with r");
-        escaperExplanation = new Label("- Your aim is\n to escape  \n- Controll with Arrow-Keys \n- Throw Bananas with 1");
+        catcherExplanation = new Label("- Aim: catch him in 3 min \n- Controls: WASD \n- Throw Bananas: r");
+        escaperExplanation = new Label("- Aim: escape while 3 min \n- Controls: Arrow-Keys \n- Throw Bananas: NumPad 0");
         GridPane.setColumnSpan(explainTitle, 2);
         //Put Nodes on Grid
         explainScenePane.add(explainTitle, 0, 0);

@@ -4,6 +4,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player extends Arc {
     final String playerName;
     private String playerRoll;
@@ -44,6 +47,7 @@ public class Player extends Arc {
             }
         }
     }
+
     public void moveRight() {
         if (moveRightStatus) {
             if (playerRoll.equals("catcher")) {
@@ -53,17 +57,17 @@ public class Player extends Arc {
             }
         }
     }
+
     public void moveUp() {
         if (moveUpStatus) {
             if (playerRoll.equals("catcher")) {
-                if (checkFeldIsFree(getTranslateX(), getTranslateY())){
-                    setTranslateY(getTranslateY() - 14);
-                }
+                setTranslateY(getTranslateY() - 14);
             } else {
                 setTranslateY(getTranslateY() - 15);
             }
         }
     }
+
     public void moveDown() {
         if (moveDownStatus) {
             if (playerRoll.equals("catcher")) {
@@ -74,10 +78,7 @@ public class Player extends Arc {
         }
     }
 
-    public boolean checkFeldIsFree(){
 
-        return true;
-    }
 
 
     //------------------------------ Getter & Setter --------------------------------------------
@@ -85,16 +86,14 @@ public class Player extends Arc {
     public String getPlayerName() {
         return playerName;
     }
+
     public String getPlayerRoll() {
         return playerRoll;
     }
+
     public void setPlayerRoll(String playerRoll) {
         this.playerRoll = playerRoll;
     }
-
-
-
-
 
 
 }
