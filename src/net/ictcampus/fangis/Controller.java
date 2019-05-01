@@ -23,7 +23,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
     protected Player catcher, escaper;
     private GameGui gui;
     protected AnimationTimer ani;
-    protected GameTimer  gameTimer;
+    protected GameTimer gameTimer;
     private checkCollision coli;
     private Keyhandler keyhandler;
     private gameObejctGenerator gobi;
@@ -41,7 +41,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         abrButton = new Button("Abbrechen");
         gameQuitButton = new Button("Quit");
         try {
-            gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart, keyboardNode,gameQuitButton,  this);
+            gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart, keyboardNode, gameQuitButton, this);
             gui.buildWelcomeScreen();
             playButton.setOnAction(this);
             nextButton.setOnAction(this);
@@ -51,15 +51,15 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             keyhandler = new Keyhandler(gui, this);
             coli = new checkCollision(this, gui);
             gobi.createObstacle(10);
-//            System.out.println(gobi.randomXPosition());
-//            System.out.println(gobi.obstacles);
+            System.out.println(gobi.obstacles);
+
+
             // need to attach KeyEvent caller to a Node of some sort.
-            // How about an invisible Box?
             keyboardNode.setFocusTraversable(true);
             keyboardNode.requestFocus();
 
             //Make Thread for Collisioncheck
-            ani = new AnimationTimer(){
+            ani = new AnimationTimer() {
                 @Override
                 public void handle(long now) {
 //                    keyboardNode.setOnKeyReleased(e -> keyhandler.releasehandle(e));
@@ -84,36 +84,31 @@ public class Controller extends Application implements EventHandler<ActionEvent>
     public void handle(ActionEvent event) {
         if (event.getSource() == playButton) {
             gui.buildSetNameScreen();
-        }
-        else if (event.getSource() == nextButton) {
+        } else if (event.getSource() == nextButton) {
             if (!gui.txtPlayer1.getText().equals("") && !gui.txtPlayer2.getText().equals("")) {
                 gui.buildExplainScreen();
-            }
-            else {
+            } else {
                 if (gui.lblErrorMessage.getScene() == null) {
                     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.1), gui.lblErrorMessage);
                     fadeTransition.setFromValue(1.0);
                     fadeTransition.setToValue(0.0);
                     fadeTransition.setCycleCount(Animation.INDEFINITE);
                     fadeTransition.play();
-                    gui.setNameScenePane.add(gui.lblErrorMessage, 0,4);
+                    gui.setNameScenePane.add(gui.lblErrorMessage, 0, 4);
                     GridPane.setColumnSpan(gui.lblErrorMessage, 2);
-                }
-                else {
-                   gui.setNameScenePane.getChildren().remove(gui.lblErrorMessage);
+                } else {
+                    gui.setNameScenePane.getChildren().remove(gui.lblErrorMessage);
                     GridPane.setColumnSpan(gui.lblErrorMessage, 2);
                 }
 
             }
-        }
-        else if (event.getSource() == gameStart) {
+        } else if (event.getSource() == gameStart) {
             gui.buildGameFieldScreen();
-
             ani.start();
+            gui.gameFieldPane.getChildren().addAll(gobi.obstacles);
             coli.start();
 //            coli.gugus();
-        }
-        else if (event.getSource() == gameQuitButton) {
+        } else if (event.getSource() == gameQuitButton) {
             gui.primarystage.close();
         }
     }

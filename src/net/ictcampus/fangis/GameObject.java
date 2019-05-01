@@ -11,8 +11,10 @@ public class GameObject extends Rectangle{
 
     public GameObject(int x, int y,int w, int h, Color color) {
         super(w,h,color);
-        setTranslateX(x);
-        setTranslateY(y);
+        setX(x);
+        setY(y);
+      //  setTranslateX(x);
+        //setTranslateY(y);
     }
 
 
