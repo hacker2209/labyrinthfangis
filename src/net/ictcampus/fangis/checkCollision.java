@@ -25,17 +25,64 @@ public class checkCollision extends Thread {
                         if (con.catcher.getBoundsInParent().intersects(con.escaper.getBoundsInParent()))  {
                             terminate();
                         }
-                        else if (con.escaper.getTranslateX() <= 10) {
+                        //Check if Player is near the Wall and look that he cannont break out of the wall
+                        if (con.escaper.getTranslateX() <= 15) {
                             con.escaper.moveLeftStatus = false;
+                            System.out.println("Escaper hat gerade Linke Wand verlassen wollen");
                         }
                         else if(con.escaper.getTranslateX() >= 5){
                             con.escaper.moveLeftStatus = true;
                         }
-                        else if (con.escaper.getTranslateX() >= gui.gameFieldPane.getMaxWidth() - 10) {
-                            con.escaper.moveLeftStatus = false;
+                        if (con.escaper.getTranslateX() >= (int)gui.gameFieldPane.getMaxWidth() - 20) {
+                            con.escaper.moveRightStatus = false;
+                            System.out.println("Escaper hat gerade Rechte Wand verlassen wollen");
                         }
-                        else if(con.escaper.getTranslateX() >= 5){
-                            con.escaper.moveLeftStatus = true;
+                        else if(con.escaper.getTranslateX() <= (int)gui.gameFieldPane.getMaxWidth() - 10){
+                            con.escaper.moveRightStatus = true;
+                        }
+                        if (con.escaper.getTranslateY() >= (int)gui.gameFieldPane.getMinHeight() - 20) {
+                            con.escaper.moveDownStatus = false;
+                            System.out.println("Escaper hat gerade untere Wand verlassen wollen");
+                        }
+                        else if(con.escaper.getTranslateY() <= (int)gui.gameFieldPane.getMinHeight() - 10){
+                            con.escaper.moveDownStatus = true;
+                        }
+                        if (con.escaper.getTranslateY() <= 15) {
+                            con.escaper.moveUpStatus = false;
+                            System.out.println("Escaper hat gerade Obere Wand verlassen wollen");
+                        }
+                        else if(con.escaper.getTranslateY() >= 5){
+                            con.escaper.moveUpStatus = true;
+                        }
+
+                        //Same for Catcher
+                        if (con.catcher.getTranslateX() <= 15) {
+                            con.catcher.moveLeftStatus = false;
+                            System.out.println("Catcher hat gerade Linke Wand verlassen wollen");
+                        }
+                        else if(con.catcher.getTranslateX() >= 5){
+                            con.catcher.moveLeftStatus = true;
+                        }
+                        if (con.catcher.getTranslateX() >= (int)gui.gameFieldPane.getMaxWidth() - 15) {
+                            con.catcher.moveRightStatus = false;
+                            System.out.println("Catcher hat gerade Rechte Wand verlassen wollen");
+                        }
+                        else if(con.catcher.getTranslateX() <= (int)gui.gameFieldPane.getMaxWidth() - 10){
+                            con.catcher.moveRightStatus = true;
+                        }
+                        if (con.catcher.getTranslateY() >= (int)gui.gameFieldPane.getMinHeight() - 20) {
+                            con.catcher.moveDownStatus = false;
+                            System.out.println("Catcher hat gerade untere Wand verlassen wollen");
+                        }
+                        else if(con.catcher.getTranslateY() <= (int)gui.gameFieldPane.getMinHeight() - 10){
+                            con.catcher.moveDownStatus = true;
+                        }
+                        if (con.catcher.getTranslateY() <= 15) {
+                            con.catcher.moveUpStatus = false;
+                            System.out.println("Catcher hat gerade Obere Wand verlassen wollen");
+                        }
+                        else if(con.catcher.getTranslateY() >= 5){
+                            con.catcher.moveUpStatus = true;
                         }
 
                     }

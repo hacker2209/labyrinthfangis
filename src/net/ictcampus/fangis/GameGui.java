@@ -165,7 +165,7 @@ public class GameGui {
         gameFieldPane = new Pane();
         gameScene = new Scene(gameRasterPane, 1000, 600);
         gameFieldPane.setMaxWidth(1000.0);
-        gameFieldPane.setMinHeight(400.0);
+        gameFieldPane.setMinHeight(600.0);
         //Initialize Nodes for Grid
         lblScore = new Label("");
         lblTimer = new Label();
@@ -180,8 +180,8 @@ public class GameGui {
         //-------------Put nodes on Field
         gameFieldPane.getChildren().add(keyboardNode);
         //Make Players
-        catcher = new Player(10, 10, lblPlayer1.getText(), "catcher", Color.RED, 5, 5, 15, 15, 45, 270);
-        escaper = new Player(((int) gameFieldPane.getMaxWidth() - 50), 10, lblPlayer2.getText(), "escaper", Color.BLUE, 5, 5, 15, 15, 45, 270);
+        catcher = new Player(20,20, lblPlayer1.getText(),"catcher", Color.RED, 5, 5, 15,15,45,270);
+        escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 20, lblPlayer2.getText(), "escaper", Color.BLUE, 5,5,15,15,45,270);
         con.setPlayers(catcher, escaper);
         gameFieldPane.getChildren().add(escaper);
         gameFieldPane.getChildren().add(catcher);
