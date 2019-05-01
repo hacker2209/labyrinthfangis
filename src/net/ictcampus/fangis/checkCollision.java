@@ -25,12 +25,19 @@ public class checkCollision extends Thread {
                         if (con.catcher.getBoundsInParent().intersects(con.escaper.getBoundsInParent()))  {
                             terminate();
                         }
-                        else if (con.escaper.getTranslateY()<= 0) {
-//                            System.out.println("Das war die rechte oder linke Wand");
+                        else if (con.escaper.getTranslateX() <= 10) {
+                            con.escaper.moveLeftStatus = false;
                         }
-                        else if(con.escaper.getTranslateX() <= 0){
-//                            System.out.println("Das war oben oder unten");
+                        else if(con.escaper.getTranslateX() >= 5){
+                            con.escaper.moveLeftStatus = true;
                         }
+                        else if (con.escaper.getTranslateX() >= gui.gameFieldPane.getMaxWidth() - 10) {
+                            con.escaper.moveLeftStatus = false;
+                        }
+                        else if(con.escaper.getTranslateX() >= 5){
+                            con.escaper.moveLeftStatus = true;
+                        }
+
                     }
                 };
                 animationTimer.start();

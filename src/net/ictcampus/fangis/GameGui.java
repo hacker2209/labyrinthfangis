@@ -22,7 +22,7 @@ public class GameGui {
     protected Controller con;
     protected Stage primarystage;
     protected Scene setNameScene, explainScene, welcomeScene, gameScene, gameOverScene;
-    protected BorderPane gameOverPane;
+    protected BorderPane gameOverPane, welcomePane;
     protected GridPane setNameScenePane, explainScenePane, gameRasterPane;
     protected Pane gameFieldPane;
 
@@ -62,21 +62,21 @@ public class GameGui {
     }
 
     public void buildWelcomeScreen() {
-        gameOverPane = new BorderPane();
-        welcomeScene = new Scene(gameOverPane, 300, 160);
+        welcomePane = new BorderPane();
+        welcomeScene = new Scene(welcomePane, 300, 160);
         //Create Nodes for welcomeScene
         welcomeText = new Label("Welcome to our Labyrinth-Fanigs Game!\nThis is a simple Game\nmade by zauggmo and Technat314");
         gameTitle = new Label("Labyrinth-Fangis");
 
         //Put Nodes on PaneT
-        gameOverPane.setTop(gameTitle);
-        gameOverPane.setBottom(playButton);
-        gameOverPane.setCenter(welcomeText);
+        welcomePane.setTop(gameTitle);
+        welcomePane.setBottom(playButton);
+        welcomePane.setCenter(welcomeText);
         //Add some Style to welcomeScene
         welcomeScene.getStylesheets().add(getClass().getResource("css/welcomeScene.css").toExternalForm());
         gameTitle.getStyleClass().add("gameTitle");
         playButton.getStyleClass().add("playButton");
-        gameOverPane.getStyleClass().add("pane");
+        welcomePane.getStyleClass().add("pane");
         welcomeText.getStyleClass().add("text");
         //Show welcomeScene
         primarystage.setTitle("Labyrinthfangis");
