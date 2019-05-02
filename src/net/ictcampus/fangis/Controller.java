@@ -16,7 +16,7 @@ import javafx.util.Duration;
 public class Controller extends Application implements EventHandler<ActionEvent> {
 
     //Instancevariabels
-    private Button playButton, nextButton, abrButton, gameStart, gameQuitButton;
+    private Button playButton, nextButton, abrButton, gameStart, gameQuitButton, gameAgainButton;
     protected Box keyboardNode = new Box();
     protected Player catcher, escaper;
     private GameGui gui;
@@ -42,13 +42,15 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         nextButton = new Button("Next");
         abrButton = new Button("Abbrechen");
         gameQuitButton = new Button("Quit");
+        gameAgainButton = new Button("New Game");
         try {
-            gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart, keyboardNode, gameQuitButton, this);
+            gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart, keyboardNode, gameQuitButton,gameAgainButton, this);
             gui.buildWelcomeScreen();
             playButton.setOnAction(this);
             nextButton.setOnAction(this);
             gameStart.setOnAction(this);
             gameQuitButton.setOnAction(this);
+            gameAgainButton.setOnAction(this);
             keyhandler = new Keyhandler(gui, this);
             // need to attach KeyEvent caller to a Node of some sort.
             keyboardNode.setFocusTraversable(true);
@@ -106,6 +108,9 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             gui.gameFieldPane.getChildren().addAll(gobi.obstacles);
             coli = new checkCollision(this, gui);
             coli.start();
+        }
+        else if (event.getSource()== gameAgainButton){
+            gui.buildWelcomeScreen();
         }
         else if (event.getSource() == gameQuitButton) {
             gui.primarystage.close();

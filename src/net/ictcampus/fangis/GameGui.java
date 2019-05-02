@@ -48,9 +48,9 @@ public class GameGui {
 
     //Instancevariabels for gameOver
     protected Label gameOverText, gameOverTitle;
-    protected Button gameQuitButton;
+    protected Button gameQuitButton, gameAgainButton;
 
-    public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart, Box keyboardNode, Button gameQuitButton, Controller con) {
+    public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart, Box keyboardNode, Button gameQuitButton,Button gameAgainButton, Controller con) {
         this.primarystage = primarystage;
         this.playButton = playButton;
         this.nextButton = nextButton;
@@ -59,6 +59,7 @@ public class GameGui {
         this.keyboardNode = keyboardNode;
         this.gameQuitButton = gameQuitButton;
         this.con = con;
+        this.gameAgainButton = gameAgainButton;
     }
 
     public void buildWelcomeScreen() {
@@ -161,6 +162,8 @@ public class GameGui {
     public void buildGameFieldScreen() {
         gameRasterPane = new GridPane();
         gameFieldPane = new Pane();
+
+
         gameScene = new Scene(gameRasterPane, 1000, 630);
         gameFieldPane.setMaxWidth(1000.0);
         gameFieldPane.setMinHeight(600.0);
@@ -227,16 +230,19 @@ public class GameGui {
         gameOverPane.add(gameOverText, 0, 1);
         gameOverPane.add(scorePane, 0, 2);
         gameOverPane.add(gameQuitButton, 0, 3);
+        gameOverPane.add(gameAgainButton,1,3);
         //Add some Style to welcomeScene
         gameOverScene.getStylesheets().add(getClass().getResource("css/gameOverScene.css").toExternalForm());
         gameOverTitle.getStyleClass().add("gameOverTitle");
         gameQuitButton.getStyleClass().add("gameQuitButton");
+        gameAgainButton.getStyleClass().add("gameQuitButton");
         gameOverPane.getStyleClass().add("pane");
         gameOverText.getStyleClass().add("gameOvertext");
         lblScore.getStyleClass().add("scoreText");
         lblScore.setStyle("-fx-font-family: Courier New, Courier, monospace;");
         gameOverPane.setVgap(10);
         scorePane.setMinHeight(100);
+        gameOverPane.setColumnSpan(scorePane,2);
         //Show welcomeScene
         primarystage.setScene(gameOverScene);
         primarystage.show();
