@@ -60,9 +60,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             ani = new AnimationTimer() {
                 @Override
                 public void handle(long now) {
-//                    keyboardNode.setOnKeyReleased(e -> keyhandler.releasehandle(e));
                     keyboardNode.setOnKeyPressed(e -> keyhandler.handle(e));
-                    // UPDATE
                 }
             };
         } catch (Exception e) {

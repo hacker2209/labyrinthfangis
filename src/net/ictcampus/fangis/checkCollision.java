@@ -88,8 +88,6 @@ public class checkCollision extends Thread {
                         } else if (con.catcher.getTranslateY() >= 5) {
                             con.catcher.moveUpStatus = true;
                         }
-                        checkGameObjectCollision();
-
                     }
                 };
                 animationTimer.start();
@@ -97,96 +95,6 @@ public class checkCollision extends Thread {
             }
         });
     }
-
-    public void checkGameObjectCollision() {
-        for (GameObject obj : con.gobi.obstacles) {
-            //Eckpunkte für x und y Koordinaten holen
-            int obenlinksx = (int) obj.getX() - 10;
-            int obenrechtsx = (int) obj.getX() + (int) obj.getWidth() + 10;
-            int obenlinksy = (int) obj.getY() - 10;
-            int untenlinksy = (int) obj.getY() + (int) obj.getHeight() + 10;
-            int obenrechtsy = (int) obj.getY();
-            int untenlinksx = (int) obj.getX();
-            int untenrechtsx = (int) obj.getX() + (int) obj.getWidth();
-            int untenrechtsy = (int) obj.getY() + (int) obj.getHeight();
-
-            //Koordinaten des Spielers vernünftig abspeichern
-            int xesc = (int) con.escaper.getTranslateX();
-            int yesc = (int) con.escaper.getTranslateY();
-            int xcat = (int) con.catcher.getTranslateX();
-            int ycat = (int) con.catcher.getTranslateY();
-
-            //Listen mit x und y Werten des Objekts machen
-            List<Integer> xwerte = makeRange(obenlinksx, obenrechtsx);
-            List<Integer> ywerte = makeRange(obenlinksy, untenlinksy);
-
-            if ((xwerte.contains(xesc)) && ywerte.contains(yesc)) {
-                System.out.println("Oh jetzt hat der Catcher ein Object berührt");
-                switch (con.keyhandler.latestkey) {
-                    case UP:
-                        con.escaper.moveUpStatus = false;
-                    case DOWN:
-                        con.escaper.moveDownStatus = false;
-                    case LEFT:
-                        con.escaper.moveLeftStatus = false;
-                    case RIGHT:
-                        con.escaper.moveRightStatus = false;
-                }
-//                if (xesc <= obenlinksx + 15 && ywerte.contains(yesc)) {
-//                    con.catcher.moveDownStatus = false;
-//                } else if (xesc >= untenlinksx - 15 && ywerte.contains(yesc)) {
-//                    con.catcher.moveUpStatus = false;
-//                } else if (yesc <= obenlinksy + 15 && xwerte.contains(xesc)) {
-//                    con.catcher.moveRightStatus = false;
-//                } else if (yesc >= untenrechtsy - 15 && xwerte.contains(xesc)) {
-//                    con.catcher.moveLeftStatus = false;
-//                }
-            }
-//            if ((!xwerte.contains(xesc)) && !ywerte.contains(yesc)) {
-//                con.escaper.moveDownStatus = true;
-//                con.escaper.moveUpStatus = true;
-//                con.escaper.moveLeftStatus = true;
-//                con.escaper.moveRightStatus = true;
-//            }
-            if ((xwerte.contains(xcat)) && ywerte.contains(ycat)) {
-                System.out.println("Oh jetzt hat der Escaper ein Object berührt");
-                switch (con.keyhandler.latestkey) {
-                    case W:
-                        con.catcher.moveUpStatus = false;
-                    case S:
-                        con.catcher.moveDownStatus = false;
-                    case A:
-                        con.catcher.moveLeftStatus = false;
-                    case D:
-                        con.catcher.moveRightStatus = false;
-                }
-//                if (xcat <= obenlinksx + 15 && ywerte.contains(ycat)) {
-//                    con.escaper.moveDownStatus = false;
-//                } else if (xcat >= untenlinksx - 15 && ywerte.contains(ycat)) {
-//                    con.escaper.moveUpStatus = false;
-//                } else if (ycat <= obenlinksy + 15 && xwerte.contains(xcat)) {
-//                    con.escaper.moveRightStatus = false;
-//                } else if (ycat >= untenrechtsy - 15 && xwerte.contains(xcat)) {
-//                    con.escaper.moveLeftStatus = false;
-//                }
-            }
-//            if ((!xwerte.contains(xcat)) && !ywerte.contains(ycat)) {
-//                con.catcher.moveDownStatus = true;
-//                con.catcher.moveUpStatus = true;
-//                con.catcher.moveRightStatus = true;
-//                con.catcher.moveLeftStatus = true;
-//            }
-        }
-    }
-
-    private List<Integer> makeRange(int min, int max) {
-        List<Integer> range = new ArrayList<>();
-        for (int i = min; i <= max; i++) {
-            range.add(i);
-        }
-        return range;
-    }
-
 
     private void terminate() {
         db = new ScoreJDBCDao();
