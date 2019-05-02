@@ -29,7 +29,7 @@ public class gameObejctGenerator {
             int[] obdims = getRandomdimensions();
             int x = randomXPosition();
             int y = randomYPosition();
-            GameObject obstacle = new GameObject(x, y, obdims[0], obdims[1], Color.GRAY);
+            GameObject obstacle = new GameObject(x, y, obdims[0], obdims[1], Color.BLACK);
             obstacles.add(obstacle);
         }
     }

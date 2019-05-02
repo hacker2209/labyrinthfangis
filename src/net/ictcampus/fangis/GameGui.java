@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import net.ictcampus.db.ScoreJDBCDao;
 
@@ -160,25 +161,26 @@ public class GameGui {
     public void buildGameFieldScreen() {
         gameRasterPane = new GridPane();
         gameFieldPane = new Pane();
-        gameScene = new Scene(gameRasterPane, 1000, 600);
+        gameScene = new Scene(gameRasterPane, 1000, 630);
         gameFieldPane.setMaxWidth(1000.0);
         gameFieldPane.setMinHeight(600.0);
         //Initialize Nodes for Grid
-        lblScore = new Label("");
         lblTimer = new Label();
         //Grid Styling
-        setNameScene.getStylesheets().add(getClass().getResource("css/gameField.css").toExternalForm());
-        gameFieldPane.getStyleClass().add("pane");
+        gameScene.getStylesheets().add(getClass().getResource("css/gameField.css").toExternalForm());
+        gameFieldPane.getStyleClass().add("field");
+        lblTimer.getStyleClass().add("timer");
+        gameRasterPane.getStyleClass().add("grid");
+
         //Put Nodes on Raster
         gameRasterPane.add(gameFieldPane, 0, 0);
 //        gameRasterPane.add(abrButton,0,1);
-        gameRasterPane.add(lblScore, 1, 1);
-        gameRasterPane.add(lblTimer, 2, 1);
+        gameRasterPane.add(lblTimer, 0, 1);
         //-------------Put nodes on Field
         gameFieldPane.getChildren().add(keyboardNode);
         //Make Players
-        catcher = new Player(20,20, txtPlayer1.getText(),"catcher", Color.RED, 5, 5, 15,15,45,270);
-        escaper = new Player(((int)gameFieldPane.getMaxWidth() - 50 ), 20, txtPlayer2.getText(), "escaper", Color.BLUE, 5,5,15,15,45,270);
+        catcher = new Player(20, 20, txtPlayer1.getText(), "catcher", Color.RED, 5, 5, 15, 15, 45, 270);
+        escaper = new Player(((int) gameFieldPane.getMaxWidth() - 100), 20, txtPlayer2.getText(), "escaper", Color.BLUE, 5, 5, 15, 15, 45, 270);
         con.setPlayers(catcher, escaper);
         gameFieldPane.getChildren().add(escaper);
         gameFieldPane.getChildren().add(catcher);
@@ -190,7 +192,7 @@ public class GameGui {
     }
 
     public void buildGameOverScreen() {
-        int row= 0;
+        int row = 0;
         gameOverPane = new GridPane();
         scoreDataPane = new GridPane();
         scorePane = new ScrollPane();
@@ -203,7 +205,7 @@ public class GameGui {
         List<String> max = db.maxScore();
         for (String i : max) {
             lblScore = new Label();
-            switch (row){
+            switch (row) {
                 case 0:
                     lblScore.setTextFill(Color.web("#ffd700"));
                     break;
@@ -214,23 +216,25 @@ public class GameGui {
                     lblScore.setTextFill(Color.web("#CD7F32"));
                     break;
             }
-            lblScore.setText(row+1+". Place: "+i);
-            scoreDataPane.add(lblScore,0,row);
+            lblScore.setText(row + 1 + ". Place: " + i);
+            scoreDataPane.add(lblScore, 0, row);
             row++;
         }
         scorePane.setContent(scoreDataPane);
         //Put Nodes on PaneT
-        gameOverPane.add(gameOverTitle,0,0);
+        gameOverPane.add(gameOverTitle, 0, 0);
         //gameOverPane.setBottom(gameQuitButton);
-       gameOverPane.add(gameOverText, 0,1);
-       gameOverPane.add(scorePane,0,2);
-       gameOverPane.add(gameQuitButton,0,3);
+        gameOverPane.add(gameOverText, 0, 1);
+        gameOverPane.add(scorePane, 0, 2);
+        gameOverPane.add(gameQuitButton, 0, 3);
         //Add some Style to welcomeScene
         gameOverScene.getStylesheets().add(getClass().getResource("css/gameOverScene.css").toExternalForm());
         gameOverTitle.getStyleClass().add("gameOverTitle");
         gameQuitButton.getStyleClass().add("gameQuitButton");
         gameOverPane.getStyleClass().add("pane");
         gameOverText.getStyleClass().add("gameOvertext");
+        lblScore.getStyleClass().add("scoreText");
+        lblScore.setStyle("-fx-font-family: Courier New, Courier, monospace;");
         gameOverPane.setVgap(10);
         scorePane.setMinHeight(100);
         //Show welcomeScene

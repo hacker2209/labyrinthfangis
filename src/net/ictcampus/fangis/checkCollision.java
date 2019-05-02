@@ -122,7 +122,7 @@ public class checkCollision extends Thread {
 
             if ((xwerte.contains(xesc)) && ywerte.contains(yesc)) {
                 System.out.println("Oh jetzt hat der Catcher ein Object berührt");
-                switch(con.keyhandler.latestkey) {
+                switch (con.keyhandler.latestkey) {
                     case UP:
                         con.escaper.moveUpStatus = false;
                     case DOWN:
@@ -150,7 +150,7 @@ public class checkCollision extends Thread {
 //            }
             if ((xwerte.contains(xcat)) && ywerte.contains(ycat)) {
                 System.out.println("Oh jetzt hat der Escaper ein Object berührt");
-                switch(con.keyhandler.latestkey) {
+                switch (con.keyhandler.latestkey) {
                     case W:
                         con.catcher.moveUpStatus = false;
                     case S:

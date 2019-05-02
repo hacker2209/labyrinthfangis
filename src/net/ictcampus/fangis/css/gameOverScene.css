@@ -13,6 +13,12 @@
     -fx-padding: 10px;
 
 }
-.gameOvertext{
+
+.gameOvertext {
     -fx-font-family: "Courier New", Courier, monospace;
+}
+
+.scoreText {
+    -fx-font-family: "Courier New", Courier, monospace;
+    -fx-text-fill: red;
 }

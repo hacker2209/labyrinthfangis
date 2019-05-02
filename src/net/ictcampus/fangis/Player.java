@@ -86,6 +86,14 @@ public class Player extends Arc {
         return playerName;
     }
 
+    public String getPlayerRoll(){
+        return playerRoll;
+    }
+
+    public void setPlayerRoll(String playerRoll) {
+        this.playerRoll = playerRoll;
+    }
+
 
 
 

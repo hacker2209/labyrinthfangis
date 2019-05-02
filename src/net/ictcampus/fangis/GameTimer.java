@@ -63,7 +63,7 @@ public class GameTimer {
     public void showTimer() {
         int minute = (int) (timeLeftMilliseconds / 1000) / 60;
         int second = (int) (timeLeftMilliseconds / 1000) % 60;
-        gui.lblTimer.setText(minute + ":" + second);
+        gui.lblTimer.setText("Time left: "+minute + ":" + second);
         System.out.println(minute + ":" + second);
         //System.out.println(timeLeftMilliseconds);
     }

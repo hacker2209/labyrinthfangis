@@ -1,7 +1,14 @@
-.banana{
+.banana {
     -fx-max-width: 10px;
     -fx-max-width-height: 10px;
 }
-.pane{
-    -fx-background-image: url("img/gameField.JPG");
+
+.field {
+    -fx-background-color: green;
+    -fx-min-width: 1000px;
+}
+
+.timer {
+    -fx-font-family: "Courier New", Courier, monospace;
+    -fx-font-size: 1.5em;
 }
