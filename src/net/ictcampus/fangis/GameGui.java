@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import net.ictcampus.db.ScoreJDBCDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameGui {
@@ -49,6 +50,9 @@ public class GameGui {
     //Instancevariabels for gameOver
     protected Label gameOverText, gameOverTitle;
     protected Button gameQuitButton, gameAgainButton;
+
+    //Instancevariables for throwBananas
+    public List<Label> bananas = new ArrayList<>();
 
     public GameGui(Stage primarystage, Button playButton, Button nextButton, Button abrButton, Button gameStart, Box keyboardNode, Button gameQuitButton,Button gameAgainButton, Controller con) {
         this.primarystage = primarystage;
@@ -187,6 +191,7 @@ public class GameGui {
         con.setPlayers(catcher, escaper);
         gameFieldPane.getChildren().add(escaper);
         gameFieldPane.getChildren().add(catcher);
+
         //Show Scene
         primarystage.setScene(gameScene);
         gameTimer = new GameTimer();
@@ -255,6 +260,7 @@ public class GameGui {
         banana.setFitWidth(30);
         lblBanana = new Label();
         lblBanana.setGraphic(banana);
+        bananas.add(lblBanana);
         gameFieldPane.getChildren().add(lblBanana);
         lblBanana.getStyleClass().add("banana");
         lblBanana.setMinWidth(10);

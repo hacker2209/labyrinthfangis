@@ -1,6 +1,7 @@
 package net.ictcampus.fangis;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -50,6 +51,7 @@ public class Keyhandler implements EventHandler<KeyEvent> {
                 if (!checkIfFieldIsFree("escaper")) {
                     gui.escaper.setTranslateX(gui.escaper.getTranslateX() - 20);
                 }
+                break;
             case W:
                 gui.catcher.moveUp();
                 if (!checkIfFieldIsFree("catcher")) {
@@ -90,6 +92,11 @@ public class Keyhandler implements EventHandler<KeyEvent> {
     }
 
     private boolean checkIfFieldIsFree(String player) {
+        //Koordinaten des Spielers vernünftig abspeichern
+        int xesc = (int) con.escaper.getTranslateX();
+        int yesc = (int) con.escaper.getTranslateY();
+        int xcat = (int) con.catcher.getTranslateX();
+        int ycat = (int) con.catcher.getTranslateY();
         boolean permisson = true;
         for (GameObject obj : con.gobi.obstacles) {
             //Eckpunkte für x und y Koordinaten holen
@@ -102,11 +109,6 @@ public class Keyhandler implements EventHandler<KeyEvent> {
             int untenrechtsx = (int) obj.getX() + (int) obj.getWidth();
             int untenrechtsy = (int) obj.getY() + (int) obj.getHeight();
 
-            //Koordinaten des Spielers vernünftig abspeichern
-            int xesc = (int) con.escaper.getTranslateX();
-            int yesc = (int) con.escaper.getTranslateY();
-            int xcat = (int) con.catcher.getTranslateX();
-            int ycat = (int) con.catcher.getTranslateY();
 
             //Listen mit x und y Werten des Objekts machen
             List<Integer> xwerte = makeRange(obenlinksx, obenrechtsx);
@@ -127,8 +129,27 @@ public class Keyhandler implements EventHandler<KeyEvent> {
                 }
             }
         }
+
+        if (!gui.bananas.isEmpty()) {
+            for (Label bani : gui.bananas) {
+                //Eckpunkte für x und y Koordinaten holen
+
+                if (player.equals("catcher")) {
+                    if (bani.getBoundsInParent().intersects(gui.catcher.getBoundsInParent())) {
+                        permisson = false;
+                    }
+                }
+
+                if (player.equals("escaper")) {
+                    if (bani.getBoundsInParent().intersects(gui.escaper.getBoundsInParent())) {
+                        permisson = false;
+                    }
+                }
+            }
+        }
         return permisson;
     }
+
 
     private List<Integer> makeRange(int min, int max) {
         List<Integer> range = new ArrayList<>();

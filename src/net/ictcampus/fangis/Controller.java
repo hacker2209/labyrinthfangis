@@ -17,8 +17,8 @@ public class Controller extends Application implements EventHandler<ActionEvent>
 
     //Instancevariabels
     private Button playButton, nextButton, abrButton, gameStart, gameQuitButton, gameAgainButton;
-    protected Box keyboardNode = new Box();
-    protected Player catcher, escaper;
+    private Box keyboardNode = new Box();
+    private Player catcher, escaper;
     private GameGui gui;
     protected AnimationTimer ani;
     protected GameTimer gameTimer;
@@ -106,6 +106,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             gui.gameFieldPane.getChildren().addAll(gobi.obstacles);
             coli = new checkCollision(this, gui);
             coli.start();
+//            gui.throwBanana(1050, 800);
         }
         else if (event.getSource()== gameAgainButton){
             gui.buildWelcomeScreen();
