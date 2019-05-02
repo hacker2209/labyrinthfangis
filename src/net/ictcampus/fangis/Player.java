@@ -82,16 +82,9 @@ public class Player extends Arc {
 
     //------------------------------ Getter & Setter --------------------------------------------
 
+    //Needed for DB insert
     public String getPlayerName() {
         return playerName;
-    }
-
-    public String getPlayerRoll(){
-        return playerRoll;
-    }
-
-    public void setPlayerRoll(String playerRoll) {
-        this.playerRoll = playerRoll;
     }
 
 

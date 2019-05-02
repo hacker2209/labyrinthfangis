@@ -150,7 +150,6 @@ public class Keyhandler implements EventHandler<KeyEvent> {
         return permisson;
     }
 
-
     private List<Integer> makeRange(int min, int max) {
         List<Integer> range = new ArrayList<>();
         for (int i = min; i <= max; i++) {

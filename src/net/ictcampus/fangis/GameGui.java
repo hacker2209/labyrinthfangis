@@ -253,7 +253,7 @@ public class GameGui {
         primarystage.show();
     }
 
-    public void throwBanana(double x, double y) {
+    protected void throwBanana(double x, double y) {
         Image image = new Image(getClass().getResourceAsStream("img/banana.png"));
         ImageView banana = new ImageView(image);
         banana.setFitHeight(30);
