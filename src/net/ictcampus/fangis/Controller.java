@@ -18,12 +18,12 @@ public class Controller extends Application implements EventHandler<ActionEvent>
     //Instancevariabels
     private Button playButton, nextButton, abrButton, gameStart, gameQuitButton, gameAgainButton;
     private Box keyboardNode = new Box();
-    private Player catcher, escaper;
-    private GameGui gui;
+    protected Player catcher, escaper;
+    protected GameGui gui;
     protected AnimationTimer ani;
     protected GameTimer gameTimer;
     private checkCollision coli;
-    protected Keyhandler keyhandler;
+    private Keyhandler keyhandler;
     protected gameObejctGenerator gobi;
 
     public static void main(String[] args) {
