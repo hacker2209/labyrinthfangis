@@ -1,16 +1,19 @@
 package net.ictcampus.fangis;
 
+import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class JUnitTest {
+    JUnit j = new JUnit();
 
     @Test
-    public void addToList() {
+    public void findInListTest() {
+        j.addToList("Hund");
+        Assert.assertEquals(j.findInList("Hund"), 0);
     }
 
     @Test
-    public void findInList() {
+    public void findInListTest2() {
+        Assert.assertEquals(j.findInList("Affe"), 99);
     }
 }

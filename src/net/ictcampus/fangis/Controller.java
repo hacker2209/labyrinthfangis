@@ -32,6 +32,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
 
     /**
      * Real Main logic, looks for Buttonactions, has AnimatorTimer for Game...
+     *
      * @param primaryStage Stage to set the Scenes
      * @throws Exception Is needen but not throwed
      */
@@ -44,7 +45,7 @@ public class Controller extends Application implements EventHandler<ActionEvent>
         gameQuitButton = new Button("Quit");
         gameAgainButton = new Button("New Game");
         try {
-            gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart, keyboardNode, gameQuitButton,gameAgainButton, this);
+            gui = new GameGui(primaryStage, playButton, nextButton, abrButton, gameStart, keyboardNode, gameQuitButton, gameAgainButton, this);
             gui.buildWelcomeScreen();
             playButton.setOnAction(this);
             nextButton.setOnAction(this);
@@ -106,12 +107,9 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             gui.gameFieldPane.getChildren().addAll(gobi.obstacles);
             coli = new checkCollision(this, gui);
             coli.start();
-//            gui.throwBanana(1050, 800);
-        }
-        else if (event.getSource()== gameAgainButton){
+        } else if (event.getSource() == gameAgainButton) {
             gui.buildWelcomeScreen();
-        }
-        else if (event.getSource() == gameQuitButton) {
+        } else if (event.getSource() == gameQuitButton) {
             gui.primarystage.close();
         }
     }

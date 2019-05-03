@@ -8,8 +8,6 @@ import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javafx.scene.input.KeyCode.*;
-
 public class Keyhandler implements EventHandler<KeyEvent> {
     public GameGui gui;
     private Controller con;

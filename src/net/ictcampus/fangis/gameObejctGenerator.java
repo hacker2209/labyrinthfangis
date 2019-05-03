@@ -2,7 +2,10 @@ package net.ictcampus.fangis;
 
 import javafx.scene.paint.Color;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class gameObejctGenerator {
 
@@ -20,6 +23,7 @@ public class gameObejctGenerator {
 
     /**
      * Generates random Objects
+     *
      * @param anzahl number of GameObjects
      */
     public void createObstacles(int anzahl) {
@@ -36,6 +40,7 @@ public class gameObejctGenerator {
 
     /**
      * Generates the random X Position
+     *
      * @return Random X Position
      */
     public int randomXPosition() {
@@ -62,6 +67,7 @@ public class gameObejctGenerator {
 
     /**
      * Generates the random Y Position
+     *
      * @return Random Y Position
      */
     public int randomYPosition() {
@@ -100,6 +106,7 @@ public class gameObejctGenerator {
 
     /**
      * Takes a random Width and Height out of a list
+     *
      * @return Random Width and Height
      */
     public int[] getRandomdimensions() {
@@ -111,7 +118,8 @@ public class gameObejctGenerator {
 
     /**
      * List of Ranges with a Limit
-     * @param from Range start
+     *
+     * @param from  Range start
      * @param limit Range limit
      * @return generated Range
      */

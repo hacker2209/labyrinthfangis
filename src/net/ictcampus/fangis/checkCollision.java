@@ -6,9 +6,6 @@ import net.ictcampus.db.ScoreJDBCDao;
 
 import java.sql.Time;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class checkCollision extends Thread {
 
     private Controller con;

@@ -3,7 +3,6 @@ package net.ictcampus.fangis;
 import javafx.application.Platform;
 import net.ictcampus.db.ScoreJDBCDao;
 
-import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -63,7 +62,7 @@ public class GameTimer {
     public void showTimer() {
         int minute = (int) (timeLeftMilliseconds / 1000) / 60;
         int second = (int) (timeLeftMilliseconds / 1000) % 60;
-        gui.lblTimer.setText("Time left: "+minute + ":" + second);
+        gui.lblTimer.setText("Time left: " + minute + ":" + second);
         System.out.println(minute + ":" + second);
         //System.out.println(timeLeftMilliseconds);
     }
@@ -73,10 +72,10 @@ public class GameTimer {
     }
 
     public String getScoreTime() {
-        long difTime = 180000-timeLeftMilliseconds;
+        long difTime = 180000 - timeLeftMilliseconds;
         int min = (int) (difTime / 1000) / 60;
         int sec = (int) (difTime / 1000) % 60;
-        String scoreTime= new String(min+":"+sec);
+        String scoreTime = new String(min + ":" + sec);
         return scoreTime;
     }
 

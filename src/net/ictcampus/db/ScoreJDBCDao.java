@@ -39,7 +39,8 @@ public class ScoreJDBCDao implements ScoreDao {
             closeConnection();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("Datenbank nicht verfügbar");
         }
         return all;
 
@@ -88,7 +89,8 @@ public class ScoreJDBCDao implements ScoreDao {
             closeConnection();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("Datenbank nicht verfügbar");
         }
         return all;
     }
