@@ -2,6 +2,7 @@ package net.ictcampus.db;
 
 import net.ictcampus.fangis.Player;
 
+import java.io.IOException;
 import java.sql.Time;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface ScoreDao {
 
     public List<Player> findAll();
 
-    public void insertScore(String username, Time time, int rolleID);
+    public void insertScore(String username, Time time, int rolleID) throws IOException;
 
     public List<String> maxScore();
 

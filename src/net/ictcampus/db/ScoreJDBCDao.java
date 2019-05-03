@@ -2,6 +2,9 @@ package net.ictcampus.db;
 
 import net.ictcampus.fangis.Player;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +50,7 @@ public class ScoreJDBCDao implements ScoreDao {
     }
 
     @Override
-    public void insertScore(String username, Time time, int rolleID) {
+    public void insertScore(String username, Time time, int rolleID) throws IOException {
         try {
             con = openConnection();
             // the mysql insert statement
@@ -65,6 +68,19 @@ public class ScoreJDBCDao implements ScoreDao {
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            String rolle="";
+            if(rolleID==1){
+                rolle="Catcher";
+            }
+            else {
+                rolle="Escaper";
+            }
+
+            String fileContent = "Username: "+username+"\tRoll: "+rolle+time;
+            FileWriter score = new FileWriter("score.txt");
+            BufferedWriter writer = new BufferedWriter(score);
+            writer.write(fileContent);
+            writer.close();
         }
 
     }
