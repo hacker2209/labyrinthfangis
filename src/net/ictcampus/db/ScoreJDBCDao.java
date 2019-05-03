@@ -1,5 +1,6 @@
 package net.ictcampus.db;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import net.ictcampus.fangis.Player;
 
 import java.io.*;
@@ -74,16 +75,17 @@ public class ScoreJDBCDao implements ScoreDao {
                 rolle="Escaper";
             }
 
-            String fileContent = "Username: "+username+"\tRoll: "+rolle+time;
+            String fileContent = "Username: "+username+"\tRoll: "+rolle+"\tTime: "+time;
             FileWriter score = null;
             try {
-                score = new FileWriter("score.txt");
+                score = new FileWriter("score.txt",true);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
             BufferedWriter writer = new BufferedWriter(score);
             try {
-                writer.write(fileContent);
+                writer.newLine();
+                writer.append(fileContent);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

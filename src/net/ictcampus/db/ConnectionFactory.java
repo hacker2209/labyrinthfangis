@@ -1,5 +1,7 @@
 package net.ictcampus.db;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,7 +28,7 @@ public class ConnectionFactory {
         return connectionFactory;
     }
 
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection() throws  CommunicationsException,SQLException {
         Connection conn = null;
         conn = DriverManager.getConnection(getDbUrl(), getDbUser(), getDbPwd());
         return conn;
