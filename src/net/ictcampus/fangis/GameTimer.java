@@ -12,7 +12,7 @@ public class GameTimer {
     private long timeLeftMilliseconds = 180000;  // 3min
     GameGui gui;
     Timer timer = new Timer();
-    ScoreJDBCDao db = new ScoreJDBCDao();
+//    ScoreJDBCDao db = new ScoreJDBCDao();
 //    TimerTask task = new TimerTask() {
 //        @Override
 //        public void countStart() {

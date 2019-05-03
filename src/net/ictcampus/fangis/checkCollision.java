@@ -15,7 +15,7 @@ public class checkCollision extends Thread {
     private GameGui gui;
     private boolean done = false;
     private AnimationTimer animationTimer;
-    private ScoreJDBCDao db;
+//    private ScoreJDBCDao db;
 
     public checkCollision(Controller con, GameGui gui) {
         this.con = con;
@@ -97,11 +97,11 @@ public class checkCollision extends Thread {
     }
 
     private void terminate() {
-        db = new ScoreJDBCDao();
+//        db = new ScoreJDBCDao();
         gui.gameTimer.stopTimer();
         Time score = Time.valueOf("24:" + gui.gameTimer.getScoreTime());
         //System.out.println("Zeit: "+score);
-        db.insertScore(con.catcher.getPlayerName(), score, 1);
+//        db.insertScore(con.catcher.getPlayerName(), score, 1);
         //System.out.println("Name: "+con.catcher.getPlayerName());
         con.escaper.catched();
         con.ani.stop();

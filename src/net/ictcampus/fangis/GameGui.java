@@ -206,28 +206,28 @@ public class GameGui {
         scorePane = new ScrollPane();
         gameOverScene = new Scene(gameOverPane, 320, 250);
         //Create Nodes for welcomeScene
-        gameOverText = new Label("Tatata, the Game is over, \nthe Catcher won!");
+        gameOverText = new Label("Tatata, the Game is over \nthe Catcher won!");
         gameOverTitle = new Label("GameOver");
-        ScoreJDBCDao db = new ScoreJDBCDao();
+//        ScoreJDBCDao db = new ScoreJDBCDao();
         //db.insertScore("a", Time.valueOf("01:01:20"),2);
-        List<String> max = db.maxScore();
-        for (String i : max) {
-            lblScore = new Label();
-            switch (row) {
-                case 0:
-                    lblScore.setTextFill(Color.web("#ffd700"));
-                    break;
-                case 1:
-                    lblScore.setTextFill(Color.web("#C0C0C0"));
-                    break;
-                case 2:
-                    lblScore.setTextFill(Color.web("#CD7F32"));
-                    break;
-            }
-            lblScore.setText(row + 1 + ". Place: " + i);
-            scoreDataPane.add(lblScore, 0, row);
-            row++;
-        }
+//        List<String> max = db.maxScore();
+//        for (String i : max) {
+//            lblScore = new Label();
+//            switch (row) {
+//                case 0:
+//                    lblScore.setTextFill(Color.web("#ffd700"));
+//                    break;
+//                case 1:
+//                    lblScore.setTextFill(Color.web("#C0C0C0"));
+//                    break;
+//                case 2:
+//                    lblScore.setTextFill(Color.web("#CD7F32"));
+//                    break;
+//            }
+//            lblScore.setText(row + 1 + ". Place: " + i);
+//            scoreDataPane.add(lblScore, 0, row);
+//            row++;
+//        }
         scorePane.setContent(scoreDataPane);
         //Put Nodes on PaneT
         gameOverPane.add(gameOverTitle, 0, 0);
@@ -243,8 +243,8 @@ public class GameGui {
         gameAgainButton.getStyleClass().add("gameQuitButton");
         gameOverPane.getStyleClass().add("pane");
         gameOverText.getStyleClass().add("gameOvertext");
-        lblScore.getStyleClass().add("scoreText");
-        lblScore.setStyle("-fx-font-family: Courier New, Courier, monospace;");
+//        lblScore.getStyleClass().add("scoreText");
+//        lblScore.setStyle("-fx-font-family: Courier New, Courier, monospace;");
         gameOverPane.setVgap(10);
         scorePane.setMinHeight(100);
         gameOverPane.setColumnSpan(scorePane,2);

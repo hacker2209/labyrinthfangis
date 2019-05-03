@@ -83,7 +83,7 @@ public class Keyhandler implements EventHandler<KeyEvent> {
             case R:
                 gui.throwBanana(gui.catcher.getTranslateX() - gui.catcher.getRadiusX() * 3, gui.catcher.getTranslateY());
                 break;
-            case NUMPAD0:
+            case CONTROL:
                 gui.throwBanana(gui.escaper.getTranslateX() - gui.escaper.getRadiusX() * 3, gui.escaper.getTranslateY());
                 break;
             default:

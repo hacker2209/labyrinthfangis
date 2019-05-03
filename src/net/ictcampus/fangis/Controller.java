@@ -102,7 +102,8 @@ public class Controller extends Application implements EventHandler<ActionEvent>
             gui.buildGameFieldScreen();
             ani.start();
             gobi = new gameObejctGenerator(this);
-            gobi.createObstacles(30);
+            gobi.createObstacles(20);
+            gobi.createObstacles(20);
             gui.gameFieldPane.getChildren().addAll(gobi.obstacles);
             coli = new checkCollision(this, gui);
             coli.start();
