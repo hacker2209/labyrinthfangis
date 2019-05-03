@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import net.ictcampus.db.ScoreJDBCDao;
 
+import java.io.IOException;
 import java.sql.Time;
 
 public class checkCollision extends Thread {
@@ -98,7 +99,8 @@ public class checkCollision extends Thread {
         gui.gameTimer.stopTimer();
         Time score = Time.valueOf("24:" + gui.gameTimer.getScoreTime());
         //System.out.println("Zeit: "+score);
-        db.insertScore(con.catcher.getPlayerName(), score, 1);
+            db.insertScore(con.catcher.getPlayerName(), score, 1);
+
         //System.out.println("Name: "+con.catcher.getPlayerName());
         con.escaper.catched();
         con.ani.stop();

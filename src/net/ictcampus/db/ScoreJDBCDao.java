@@ -2,9 +2,7 @@ package net.ictcampus.db;
 
 import net.ictcampus.fangis.Player;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +48,7 @@ public class ScoreJDBCDao implements ScoreDao {
     }
 
     @Override
-    public void insertScore(String username, Time time, int rolleID) throws IOException {
+    public void insertScore(String username, Time time, int rolleID){
         try {
             con = openConnection();
             // the mysql insert statement
@@ -77,10 +75,23 @@ public class ScoreJDBCDao implements ScoreDao {
             }
 
             String fileContent = "Username: "+username+"\tRoll: "+rolle+time;
-            FileWriter score = new FileWriter("score.txt");
+            FileWriter score = null;
+            try {
+                score = new FileWriter("score.txt");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             BufferedWriter writer = new BufferedWriter(score);
-            writer.write(fileContent);
-            writer.close();
+            try {
+                writer.write(fileContent);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            try {
+                writer.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
 
     }
@@ -107,6 +118,20 @@ public class ScoreJDBCDao implements ScoreDao {
             // TODO Auto-generated catch block
             //e.printStackTrace();
             System.out.println("Datenbank nicht verfügbar");
+
+                try {
+                    BufferedReader reader=new BufferedReader(new FileReader("score.txt"));
+                    String line = reader.readLine();
+                    while (line != null) {
+                        all.add(line);
+                        // read next line
+                        line = reader.readLine();
+                    }
+                    reader.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
         }
         return all;
     }
@@ -130,7 +155,8 @@ public class ScoreJDBCDao implements ScoreDao {
             closeConnection();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("Hello World");
         }
         return all;
     }
